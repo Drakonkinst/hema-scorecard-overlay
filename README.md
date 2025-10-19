@@ -7,13 +7,27 @@ is pending.
 
 ## Setup
 
-Requires Python 3 to run.
+Requires Python 3.10 - 3.11 to run.
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## Run
+*Sometimes OBS will run into errors, so you'll need to install the libraries locally instead:*
+
+```bash
+pip install --target lib -r requirements.txt --no-user
+```
+
+## Run in OBS
+
+In Tools -> Scripts, add `obs_script.py` as a script. Make sure the Python Install Path is set to a valid Python path.
+
+*If OBS does not recognize this path, the path may include unsupported Unicode characters. There are a number of solutions for this online such as installing an embedded version of Python at a simpler file path instead.*
+
+## Run in CLI
+
+A test CLI can be run with the following command:
 
 ```bash
 python3 main.py
@@ -27,7 +41,7 @@ The display will automatically update with the correct information.
 * Every second a match is active, the time will update
 * Every time a new exchange occurs, the match data will update
 
-## Sample Output
+### Sample Output
 
 ```text
 Enter a HEMA Scorecard match URL: https://hemascorecard.com/scoreMatch.php?e=553&t=2587&m=281070
