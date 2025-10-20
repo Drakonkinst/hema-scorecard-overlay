@@ -11,9 +11,9 @@ export const OUT_DIR = "public";
 export function createBuildSettings(options) {
     return {
         entryPoints: [
-            'src/main.ts',
-            'src/overlay/overlay.ts',
-            'src/controller/controller.ts'],
+            'src/app.ts',
+            'src/overlay/app.ts',
+            'src/controller/app.ts'],
         outdir: OUT_DIR,
         splitting: true,
         bundle: true,

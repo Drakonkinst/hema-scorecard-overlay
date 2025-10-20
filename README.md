@@ -21,3 +21,5 @@ Grant esbuild.exe runtime permissions, if prompted.
 ```bash
 npm start
 ```
+
+Then open `localhost:3000`

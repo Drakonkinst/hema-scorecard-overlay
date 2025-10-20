@@ -1,0 +1,42 @@
+body {
+    font-family: "Chivo", sans-serif;
+    font-weight: normal;
+    color: #0a0a0a;
+}
+
+.navigation-wrapper {
+    display: flex;
+    flex-flow: column nowrap;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+}
+
+.navigation-buttons {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 3em;
+}
+
+.navigation-button-wrapper {
+    padding: 2em;
+    border: 1px solid black;
+    background-color: gold;
+    text-decoration: none;
+    text-align: center;
+    font-size: 1.5rem;
+    transition: 0.2s;
+}
+
+.navigation-button-wrapper:hover {
+    background-color: white;
+    cursor: pointer;
+}
+
+.navigation-button-wrapper a {
+    display: block;
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
+    color: #0a0a0a;
+}
