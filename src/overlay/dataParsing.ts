@@ -13,8 +13,10 @@ export interface MatchInfo {
 
 interface FighterInfo {
     name: string;
-    school: string | null;
+    school?: string;
     score: number;
+    backgroundColor?: string;
+    textColor?: string;
 };
 
 export interface MatchUpdate {
@@ -27,12 +29,10 @@ export const getBlankMatchInfo = (): MatchInfo => {
         tournamentName: '',
         fighter1: {
             name: '',
-            school: null,
             score: 0
         },
         fighter2: {
             name: '',
-            school: null,
             score: 0
         },
         doubles: doublesToStr(0),
@@ -46,13 +46,17 @@ export const parseOverlayInfo = (data: GetStreamOverlayInfoResponse): MatchInfo 
         tournamentName: data.tournamentName,
         fighter1: {
             name: data.fighter1Name,
-            school: data.fighter1School,
-            score: parseInt(data.fighter1Score)
+            school: data.fighter1School ?? undefined,
+            score: parseInt(data.fighter1Score),
+            backgroundColor: data.color1Code,
+            textColor: data.color1Contrast
         },
         fighter2: {
             name: data.fighter2Name,
-            school: data.fighter2School,
-            score: parseInt(data.fighter2Score)
+            school: data.fighter2School ?? undefined,
+            score: parseInt(data.fighter2Score),
+            backgroundColor: data.color2Code,
+            textColor: data.color2Contrast
         },
         doubles: doublesToStr(parseInt(data.doubles)),
         matchTime: timeToStr(parseInt(data.matchTime)),

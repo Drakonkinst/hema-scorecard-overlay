@@ -1,7 +1,23 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+}
+
+html, body {
+    height: 100%;
+    font-size: 20px; /* Sets base size for all other elements */
+}
+
 body {
     font-family: "Chivo", sans-serif;
     font-weight: normal;
     color: #0a0a0a;
+    background-color: #fefefe;
 }
 
 .navigation-wrapper {
@@ -19,7 +35,7 @@ body {
 }
 
 .navigation-button-wrapper {
-    padding: 2em;
+    padding: 2rem;
     border: 1px solid black;
     background-color: gold;
     text-decoration: none;
@@ -39,4 +55,118 @@ body {
     width: 100%;
     text-decoration: none;
     color: #0a0a0a;
+}
+
+/* Overlay */
+
+.overlay-wrapper {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 6rem;
+    padding-right: 6rem;
+}
+.overlay-content {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    height: 100%;
+}
+.overlay-divider {
+    flex: 1
+}
+
+.overlay-header {
+    background-color: #3d3f75;
+    color: #fefefe;
+    text-align: center;
+    border-radius: 15px;
+    font-size: 4rem;
+    width: 16rem;
+    height: 5rem;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.overlay-footer {
+    display: flex;
+    flex-flow: row nowrap;
+    border-radius: 10px;
+    align-items: center;
+    width: 100%;
+}
+
+.score-container {
+    display: flex;
+    flex-flow: column nowrap;
+    background-color: #3d3f75;
+    color: #fefefe;
+    text-align: center;
+    border-radius: 15px;
+    width: 18.75rem;
+}
+.fighter-scores {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 5rem;
+}
+.fighter-score {
+    flex: 1;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    width: 50%;
+    height: 6.75rem;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+    overflow: hidden;
+}
+.fighter-1-score {
+    border-right: 1px solid #fefefe;
+}
+.doubles {
+    border-top: 1px solid #fefefe;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+    font-size: 1.25rem;
+}
+
+.fighter-info {
+    display: flex;
+    flex-flow: column nowrap;
+    height: 7rem;
+    /* border: 1px solid black; */
+    flex: 1;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: #fefefe;
+    overflow: hidden;
+}
+.fighter-1-info {
+    padding-left: 2rem;
+    padding-right: 1rem;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+.fighter-2-info {
+    padding-left: 1rem;
+    padding-right: 2rem;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    text-align: end;
+}
+.fighter-name {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    font-size: 3rem;
+    flex: 1;
+}
+.fighter-school {
+    font-size: 1.25rem;
 }
