@@ -18,4 +18,4 @@ const { host, port } = await ctx.serve({
     fallback: OUT_DIR + "/index.html"
 });
 
-console.log(`Serving app at ${host ?? "localhost"}:${port}.`);
+console.log(`Serving app at http://${host ?? "localhost"}:${port}.`);

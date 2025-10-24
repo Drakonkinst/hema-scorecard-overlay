@@ -1,8 +1,8 @@
 import { z } from "zod";
 
-export const NewExchangeResponse = z.object({
+export const NewExchangeResponseSchema = z.object({
     refresh: z.boolean(),
     matchTime: z.int().nullable()
 });
 
-export type NewExchangeResponseType = z.infer<typeof NewExchangeResponse>;
+export type NewExchangeResponse = z.infer<typeof NewExchangeResponseSchema>;

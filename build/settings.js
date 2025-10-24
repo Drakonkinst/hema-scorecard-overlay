@@ -13,7 +13,8 @@ export function createBuildSettings(options) {
         entryPoints: [
             'src/app.ts',
             'src/overlay/app.ts',
-            'src/controller/app.ts'],
+            'src/controller/app.ts'
+        ],
         outdir: OUT_DIR,
         splitting: true,
         bundle: true,
