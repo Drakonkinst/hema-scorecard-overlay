@@ -22,7 +22,7 @@ export class MatchState {
                 console.warn("Invalid match info, skipping");
             } else {
                 this._matchInfo = newMatchInfo;
-                console.log(this._matchInfo);
+                // console.log(JSON.stringify(this._matchInfo, null, 4));
             }
         } else if (matchUpdate.matchTime != null) {
             this._matchInfo.matchTime = matchUpdate.matchTime;
