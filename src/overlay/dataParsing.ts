@@ -29,10 +29,12 @@ export const getBlankMatchInfo = (): MatchInfo => {
         tournamentName: '',
         fighter1: {
             name: '',
+            school: '',
             score: 0
         },
         fighter2: {
             name: '',
+            school: '',
             score: 0
         },
         doubles: doublesToStr(0),
