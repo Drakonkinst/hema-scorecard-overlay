@@ -1,47 +1,8 @@
-import type { GetStreamOverlayInfoResponse, NewExchangeResponse } from "./types";
+import type { MatchUpdate } from "../utils/matchStateTypes";
+import type { GetStreamOverlayInfoResponse, NewExchangeResponse } from "./apiTypes";
+import type { MatchInfo } from "../utils/matchStateTypes";
 
 const SECONDS_PER_MINUTE = 60;
-
-export interface MatchInfo {
-    tournamentName: string;
-    fighter1: FighterInfo;
-    fighter2: FighterInfo;
-    doubles: string; // Display string
-    matchTime: string; // Display string
-    lastExchangeId: string;
-};
-
-interface FighterInfo {
-    name: string;
-    school?: string;
-    score: number;
-    backgroundColor?: string;
-    textColor?: string;
-};
-
-export interface MatchUpdate {
-    needsRefresh: boolean;
-    matchTime: string | null;
-}
-
-export const getBlankMatchInfo = (): MatchInfo => {
-    return {
-        tournamentName: '',
-        fighter1: {
-            name: '',
-            school: '',
-            score: 0
-        },
-        fighter2: {
-            name: '',
-            school: '',
-            score: 0
-        },
-        doubles: doublesToStr(0),
-        matchTime: timeToStr(0),
-        lastExchangeId: "-1"
-    }
-};
 
 export const parseOverlayInfo = (data: GetStreamOverlayInfoResponse): MatchInfo => {
     return {
@@ -85,13 +46,13 @@ export const parseNewExchangeResponse = (data: NewExchangeResponse): MatchUpdate
     throw new Error(`Could not parse NewExchangeResponse ${data}`);
 }
 
-const timeToStr = (time: number) => {
+export const timeToStr = (time: number) => {
     const minutes = Math.floor(time / SECONDS_PER_MINUTE);
     const seconds = Math.floor(time % SECONDS_PER_MINUTE);
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
 };
 
-const doublesToStr = (doubles: number, numberOnly: boolean = false) => {
+export const doublesToStr = (doubles: number, numberOnly: boolean = false) => {
     let doubleStr = doubles.toString();
     if (numberOnly) {
         return doubleStr;

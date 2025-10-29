@@ -1,4 +1,4 @@
-import type { MatchInfo } from "./dataParsing"
+import type { MatchInfo } from "../utils/matchStateTypes";
 
 export const initInterface = () => {
 

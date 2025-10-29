@@ -1,17 +1,24 @@
-import { getBlankMatchInfo, parseNewExchangeResponse, parseOverlayInfo, type MatchInfo, type MatchUpdate } from "./dataParsing";
+import { parseNewExchangeResponse, parseOverlayInfo } from "./dataParsing";
+import { getBlankMatchInfo, type MatchUpdate } from "../utils/matchStateTypes";
+import { type MatchInfo } from "../utils/matchStateTypes";
 import { checkNeedsRefresh, queryScorecardOverlayInfo } from "./scorecardApi";
-import type { GetStreamOverlayInfoResponse, NewExchangeResponse } from "./types";
+import type { GetStreamOverlayInfoResponse, NewExchangeResponse } from "./apiTypes";
 
 export class MatchState {
     private readonly _matchId: string;
     private _matchInfo: MatchInfo;
 
-    constructor(matchId: string) {
-        this._matchId = matchId;
+    constructor(matchId?: string) {
+        this._matchId = matchId ?? '';
         this._matchInfo = getBlankMatchInfo();
     }
 
     public async updateMatch(): Promise<void> {
+        // Do no queries if it the match ID is blank
+        if (!this._matchId) {
+            return;
+        }
+
         const matchUpdate: MatchUpdate | null = await this.queryMatchUpdate();
 
         if (matchUpdate === null) {
@@ -32,6 +39,10 @@ export class MatchState {
 
     public get matchInfo() {
         return this._matchInfo;
+    }
+
+    public get matchId() {
+        return this._matchId;
     }
 
     private async queryMatchUpdate(): Promise<MatchUpdate | null> {

@@ -1,4 +1,4 @@
-import { GetStreamOverlayInfoResponseSchema, NewExchangeResponseSchema, type GetStreamOverlayInfoResponse, type NewExchangeResponse } from "./types";
+import { GetStreamOverlayInfoResponseSchema, NewExchangeResponseSchema, type GetStreamOverlayInfoResponse, type NewExchangeResponse } from "./apiTypes";
 
 const VIDEO_STREAM_MATCH = 1;
 

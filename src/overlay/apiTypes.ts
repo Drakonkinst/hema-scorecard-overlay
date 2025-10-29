@@ -1,4 +1,4 @@
-import { z } from "zod";
+import z from "zod";
 
 export const NewExchangeResponseSchema = z.object({
     refresh: z.boolean(),
@@ -24,3 +24,4 @@ export const GetStreamOverlayInfoResponseSchema = z.object({
 
 export type NewExchangeResponse = z.infer<typeof NewExchangeResponseSchema>;
 export type GetStreamOverlayInfoResponse = z.infer<typeof GetStreamOverlayInfoResponseSchema>;
+
