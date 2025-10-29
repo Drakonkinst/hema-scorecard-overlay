@@ -5,18 +5,33 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="https://hemascorecard.com/includes/images/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="./navigation.css">
     <title>HEMA Scorecard Overlay</title>
 </head>
 
 <body>
     <div class="navigation-wrapper">
-        <h1>HEMA Scorecard Overlay</h1>
-        <p>Select an option:</p>
+        <div class="navigation-header">
+            <h1>HEMA Scorecard Overlay</h1>
+            <p class="author">by Wesley Ho</p>
+        </div>
         <div class="navigation-buttons">
-            <div class="navigation-button-wrapper"><a href="/overlay">Overlay</a></div>
-            <div class="navigation-button-wrapper"><a href="/controller">Controller</a></div>
-
+            <a class="button primary-button" href="/overlay" target="_blank">
+                Open Overlay
+            </a>
+            <!-- <a class="button tertiary-button" href="/controller" target="_blank">
+                (Or just copy the link)
+            </a> -->
+            <a class="button secondary-button" href="/controller" target="_blank">
+                Configure Overlay
+            </a>
+        </div>
+        <div class="instructions">
+            <h2>How to Use</h2>
+            <ol>
+                <li>Instructions</li>
+            </ol>
         </div>
     </div>
     <script type="module" src="./app.js"></script>

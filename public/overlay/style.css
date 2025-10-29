@@ -1,63 +1,6 @@
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-}
-
-* {
-    margin: 0;
-}
-
-html, body {
-    height: 100%;
-    font-size: 20px; /* Sets base size for all other elements */
-}
-
 body {
-    font-family: "Chivo", sans-serif;
-    font-weight: normal;
-    color: #0a0a0a;
-    background-color: #fefefe;
+    background-color: #0a0a0a;
 }
-
-.navigation-wrapper {
-    display: flex;
-    flex-flow: column nowrap;
-    flex: 1;
-    align-items: center;
-    justify-content: center;
-}
-
-.navigation-buttons {
-    display: flex;
-    flex-flow: row nowrap;
-    gap: 3em;
-}
-
-.navigation-button-wrapper {
-    padding: 2rem;
-    border: 1px solid black;
-    background-color: gold;
-    text-decoration: none;
-    text-align: center;
-    font-size: 1.5rem;
-    transition: 0.2s;
-}
-
-.navigation-button-wrapper:hover {
-    background-color: white;
-    cursor: pointer;
-}
-
-.navigation-button-wrapper a {
-    display: block;
-    height: 100%;
-    width: 100%;
-    text-decoration: none;
-    color: #0a0a0a;
-}
-
-/* Overlay */
 
 .overlay-wrapper {
     display: block;
@@ -68,12 +11,14 @@ body {
     padding-left: 6rem;
     padding-right: 6rem;
 }
+
 .overlay-content {
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
     height: 100%;
 }
+
 .overlay-divider {
     flex: 1
 }
@@ -109,6 +54,7 @@ body {
     border-radius: 15px;
     width: 18.75rem;
 }
+
 .fighter-scores {
     display: flex;
     flex-flow: row nowrap;
@@ -116,6 +62,7 @@ body {
     justify-content: space-between;
     font-size: 5rem;
 }
+
 .fighter-score {
     flex: 1;
     padding-top: 0.5rem;
@@ -126,9 +73,11 @@ body {
     padding-right: 0.25rem;
     overflow: hidden;
 }
+
 .fighter-1-score {
     border-right: 1px solid #fefefe;
 }
+
 .doubles {
     border-top: 1px solid #fefefe;
     padding-bottom: 0.5rem;
@@ -147,12 +96,14 @@ body {
     background-color: #fefefe;
     overflow: hidden;
 }
+
 .fighter-1-info {
     padding-left: 2rem;
     padding-right: 1rem;
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
 }
+
 .fighter-2-info {
     padding-left: 1rem;
     padding-right: 2rem;
@@ -160,6 +111,7 @@ body {
     border-bottom-right-radius: 15px;
     text-align: end;
 }
+
 .fighter-name {
     display: flex;
     flex-flow: column nowrap;
@@ -167,6 +119,7 @@ body {
     font-size: 3rem;
     flex: 1;
 }
+
 .fighter-school {
     font-size: 1.25rem;
 }

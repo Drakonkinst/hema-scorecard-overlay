@@ -24,8 +24,6 @@ const doUpdate = async () => {
     updateInterface(matchState.matchInfo);
 };
 
-initInterface();
-
 // Start loop
 setInterval(doUpdate, UPDATE_INTERVAL);
 doUpdate();

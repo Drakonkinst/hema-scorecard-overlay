@@ -17,12 +17,12 @@ export const getBlankMatchInfo = (): MatchInfo => {
     return {
         tournamentName: '',
         fighter1: {
-            name: '',
+            name: 'Fighter 1',
             school: '',
             score: 0
         },
         fighter2: {
-            name: '',
+            name: 'Fighter 2',
             school: '',
             score: 0
         },
