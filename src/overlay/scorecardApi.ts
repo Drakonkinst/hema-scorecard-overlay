@@ -1,3 +1,4 @@
+import { getOverlaySettings } from "../utils/database";
 import { GetStreamOverlayInfoResponseSchema, NewExchangeResponseSchema, type GetStreamOverlayInfoResponse, type NewExchangeResponse } from "./apiTypes";
 
 const VIDEO_STREAM_MATCH = 1;
@@ -61,7 +62,7 @@ export const queryScorecardOverlayInfo = async (matchId: string, lastExchangeId:
 const wrapEndpoint = (endpoint: string) => {
     // To get around CORS issues, we can run a local proxy.
     // See: https://www.npmjs.com/package/local-cors-proxy
-    if (window.location.hostname === 'localhost') {
+    if (window.location.hostname === 'localhost' || getOverlaySettings().useLocalCorsRouting) {
         return `http://localhost:8010/proxy/${endpoint}`
     }
     return `https://hemascorecard.com/${endpoint}`

@@ -1,29 +1,40 @@
-import { ca } from "zod/v4/locales";
+
+export const query = <T extends Element = HTMLElement>(selector: string): T | null => {
+    const element = document.querySelector(selector) as T;
+    if (!element) {
+        console.warn(`Unable to find selector ${selector}`);
+        return null;
+    }
+    return element;
+}
+
+export const queryAll = <T extends Element = HTMLElement>(selector: string): NodeListOf<T> | null => {
+    const element = document.querySelectorAll<T>(selector);
+    if (!element) {
+        console.warn(`Unable to find selector ${selector}`);
+        return null;
+    }
+    return element;
+}
 
 export const setText = (selector: string, value: string): void => {
-    const element = document.querySelector(selector);
+    const element = query(selector);
     if (element) {
         element.textContent = value;
-    } else {
-        console.warn(`Could not find selector ${selector} for setText`);
     }
 };
 
 export const setBackgroundColor = (selector: string, value: string): void => {
-    const element = document.querySelector(selector) as HTMLElement;
+    const element = query(selector);
     if (element) {
         element.style.backgroundColor = value;
-    } else {
-        console.warn(`Could not find selector ${selector} for setBackgroundColor`);
     }
 };
 
 export const setTextColor = (selector: string, value: string): void => {
-    const element = document.querySelector(selector) as HTMLElement;
+    const element = query(selector);
     if (element) {
         element.style.color = value;
-    } else {
-        console.warn(`Could not find selector ${selector} for setTextColor`);
     }
 };
 
@@ -36,22 +47,18 @@ export const onChange = (selector: string, callback: (event: Event) => any): voi
 };
 
 export const onEvent = (selector: string, callback: (event: Event) => any, event: string): void => {
-    const element = document.querySelector(selector) as HTMLElement;
+    const element = query(selector);
     if (element) {
         element.addEventListener(event, (ev) => {
             return callback(ev);
         });
-    } else {
-        console.warn(`Could not find selector ${selector} for onEvent ${event}`);
     }
 }
 
 export const getClassList = (selector: string): DOMTokenList | null => {
-    const element = document.querySelector(selector) as HTMLElement;
+    const element = query(selector);
     if (element) {
         return element.classList;
-    } else {
-        console.warn(`Could not find selector ${selector} for getClassList`);
-        return null;
     }
+    return null;
 }
