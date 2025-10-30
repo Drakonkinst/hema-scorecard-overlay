@@ -1,5 +1,5 @@
 import { getCurrentMatchId } from "../utils/database";
-import { initInterface, updateInterface } from "./interface";
+import { updateInterface } from "./interface";
 import { MatchState } from "./matchState";
 
 const UPDATE_INTERVAL = 1 * 1000; // Every second

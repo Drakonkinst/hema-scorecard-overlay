@@ -11,7 +11,7 @@ export const updateInterface = (matchInfo: MatchInfo) => {
         return;
     }
 
-    const useTransparentOverlay = getOverlaySettings().useTransparentOverlay;
+    const useTransparentOverlay = getOverlaySettings().useTransparentOverlay ?? false;
     let fighter1BackgroundColor = matchInfo.fighter1.backgroundColor || VAR_DEFAULT_BACKGROUND_COLOR;
     let fighter2BackgroundColor = matchInfo.fighter2.backgroundColor || VAR_DEFAULT_BACKGROUND_COLOR;
     let fighter1TextColor = matchInfo.fighter1.textColor || VAR_DEFAULT_TEXT_COLOR;

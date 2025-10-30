@@ -1,12 +1,31 @@
+import z from "zod";
 import { doublesToStr, timeToStr } from "../overlay/dataParsing";
 
-export interface FighterInfo {
-    name: string;
-    school?: string;
-    score: number;
-    backgroundColor?: string;
-    textColor?: string;
-};
+export const FighterInfoSchema = z.object({
+    name: z.string(),
+    school: z.string().optional(),
+    score: z.int(),
+    backgroundColor: z.string().optional(),
+    textColor: z.string().optional()
+});
+
+export const MatchInfoSchema = z.object({
+    tournamentName: z.string(),
+    fighter1: FighterInfoSchema,
+    fighter2: FighterInfoSchema,
+    doubles: z.string(), // Display string
+    matchTime: z.string(), // Display string
+    lastExchangeId: z.string()
+});
+
+export const PartialMatchInfoSchema = MatchInfoSchema.partial().extend({
+    fighter1: FighterInfoSchema.partial().optional(),
+    fighter2: FighterInfoSchema.partial().optional(),
+});
+
+export type FighterInfo = z.infer<typeof FighterInfoSchema>;
+export type MatchInfo = z.infer<typeof MatchInfoSchema>;
+export type PartialMatchInfo = z.infer<typeof PartialMatchInfoSchema>;
 
 export interface MatchUpdate {
     needsRefresh: boolean;
@@ -31,13 +50,5 @@ export const getBlankMatchInfo = (): MatchInfo => {
         lastExchangeId: "-1"
     };
 };
-export interface MatchInfo {
-    tournamentName: string;
-    fighter1: FighterInfo;
-    fighter2: FighterInfo;
-    doubles: string; // Display string
-    matchTime: string; // Display string
-    lastExchangeId: string;
-}
-;
+
 
