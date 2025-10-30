@@ -36,7 +36,6 @@ const setup = (): void => {
         changeSettings(settings => {
             const newValue = queryKey<HTMLInputElement>("use-transparent-overlay")?.checked ?? false;
             settings.useTransparentOverlay = newValue;
-            console.log(`Setting transparent overlay to ${newValue}`);
         });
     });
 
@@ -44,7 +43,13 @@ const setup = (): void => {
         changeSettings(settings => {
             const newValue = queryKey<HTMLInputElement>("use-local-cors-routing")?.checked ?? false;
             settings.useLocalCorsRouting = newValue;
-            console.log(`Setting local cors routing to ${newValue}`);
+        });
+    });
+
+    onChange(selectorKey("switch-fighter-sides"), () => {
+        changeSettings(settings => {
+            const newValue = queryKey<HTMLInputElement>("switch-fighter-sides")?.checked ?? false;
+            settings.switchFighterSides = newValue;
         });
     });
 
