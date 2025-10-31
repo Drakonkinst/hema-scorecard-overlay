@@ -1,21 +1,24 @@
 import { getOverlaySettings } from "../utils/database";
 import { setText, setBackgroundColor, setTextColor, getClassList } from "../utils/dom";
 import type { MatchInfo } from "../utils/matchStateTypes";
+import type { MatchState } from "./matchState";
 
 const VAR_DEFAULT_BACKGROUND_COLOR = 'var(--overlay-secondary-background-color)';
 const VAR_DEFAULT_TEXT_COLOR = 'var(--overlay-secondary-text-color)';
 const TRANSPARENT = 'transparent';
 
-export const updateInterface = (matchInfo: MatchInfo) => {
+export const updateInterface = (matchState: MatchState) => {
+    const matchInfo: MatchInfo = matchState.matchInfo;
     if (!matchInfo) {
         return;
     }
 
     const settings = getOverlaySettings();
     const useTransparentOverlay = settings.useTransparentOverlay ?? false;
+    const switchFighterSides = settings.switchFighterSides ?? false;
+    const showDebugInfo = settings.showDebugInfo ?? false;
 
     // Switch sides on display only. Only use these variables to refer to fighters
-    const switchFighterSides = settings.switchFighterSides ?? false;
     const fighter1 = switchFighterSides ? matchInfo.fighter2 : matchInfo.fighter1;
     const fighter2 = switchFighterSides ? matchInfo.fighter1 : matchInfo.fighter2;
 
@@ -32,6 +35,23 @@ export const updateInterface = (matchInfo: MatchInfo) => {
         getClassList("body")?.add("transparent");
     } else {
         getClassList("body")?.remove("transparent");
+    }
+
+    if (showDebugInfo) {
+        getClassList(".overlay-debug-info")?.remove("hidden");
+
+        // Update debug info
+        setText(".debug-match-id-status", matchState.matchId || "Not Set");
+        setText(".debug-error-status", matchState.errorMessage ? `Error: ${matchState.errorMessage}` : '');
+        if (matchState.isApiConnected) {
+            setText(".debug-scorecard-api-status", "Connected");
+            getClassList(".debug-scorecard-api-status")?.remove("error");
+        } else {
+            setText(".debug-scorecard-api-status", "Not Connected");
+            getClassList(".debug-scorecard-api-status")?.add("error");
+        }
+    } else {
+        getClassList(".overlay-debug-info")?.add("hidden");
     }
 
     setText(".fighter-1-info .fighter-name", fighter1.name);

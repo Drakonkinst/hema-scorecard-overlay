@@ -1,40 +1,53 @@
 import { parseNewExchangeResponse, parseOverlayInfo } from "./dataParsing";
 import { getBlankMatchInfo, type MatchUpdate } from "../utils/matchStateTypes";
 import { type MatchInfo } from "../utils/matchStateTypes";
-import { checkNeedsRefresh, queryScorecardOverlayInfo } from "./scorecardApi";
+import { ApiStatus, checkNeedsRefresh, queryScorecardOverlayInfo, type ApiResponse } from "./scorecardApi";
 import type { GetStreamOverlayInfoResponse, NewExchangeResponse } from "./apiTypes";
 
 export class MatchState {
     private readonly _matchId: string;
     private _matchInfo: MatchInfo;
+    private _errorStatus: string | null;
+    private _apiConnected: boolean;
 
     constructor(matchId?: string) {
         this._matchId = matchId ?? '';
         this._matchInfo = getBlankMatchInfo();
+        this._errorStatus = null;
+        this._apiConnected = false;
     }
 
     public async updateMatch(): Promise<void> {
         // Do no queries if it the match ID is blank
         if (!this._matchId) {
+            this._errorStatus = "No match ID set!";
             return;
         }
 
         const matchUpdate: MatchUpdate | null = await this.queryMatchUpdate();
 
         if (matchUpdate === null) {
-            console.warn("Invalid match update, skipping");
-        } else if (matchUpdate.needsRefresh) {
+            return;
+        }
+
+        if (matchUpdate.needsRefresh) {
             const newMatchInfo: MatchInfo | null = await this.queryMatchInfo();
             if (newMatchInfo === null) {
-                console.warn("Invalid match info, skipping");
-            } else {
-                this._matchInfo = newMatchInfo;
-                // console.log(JSON.stringify(this._matchInfo, null, 4));
+                return;
             }
+            this._matchInfo = newMatchInfo;
+            this.clearErrors();
+            // console.log(JSON.stringify(this._matchInfo, null, 4));
         } else if (matchUpdate.matchTime != null) {
             this._matchInfo.matchTime = matchUpdate.matchTime;
+            this.clearErrors();
             // console.log("Match Time:", this._matchInfo.matchTime);
         }
+    }
+
+    private clearErrors() {
+        this._apiConnected = true;
+        this._errorStatus = null;
     }
 
     public get matchInfo() {
@@ -45,25 +58,45 @@ export class MatchState {
         return this._matchId;
     }
 
+    public get errorMessage() {
+        return this._errorStatus;
+    }
+
+    public get isApiConnected() {
+        return this._apiConnected;
+    }
+
     private async queryMatchUpdate(): Promise<MatchUpdate | null> {
-        try {
-            const rawData: NewExchangeResponse = await checkNeedsRefresh(this._matchId, this._matchInfo.lastExchangeId);
-            return parseNewExchangeResponse(rawData);
-        } catch {
+        const response: ApiResponse<NewExchangeResponse> = await checkNeedsRefresh(this._matchId, this._matchInfo.lastExchangeId);
+        if ("data" in response) {
+            return parseNewExchangeResponse(response.data);
+        } else {
+            this.handleErrorStatus("queryMatchUpdate", response.error, response.message);
             return null;
-        };
+        }
     }
 
     private async queryMatchInfo(): Promise<MatchInfo | null> {
-        try {
-            const rawData: GetStreamOverlayInfoResponse | null = await queryScorecardOverlayInfo(this._matchId, this._matchInfo.lastExchangeId);
-            if (rawData === null) {
-                throw new Error("Could not parse getStreamOverlayInfo response");
-            }
-            const matchInfo = parseOverlayInfo(rawData);
+        const response: ApiResponse<GetStreamOverlayInfoResponse> = await queryScorecardOverlayInfo(this._matchId, this._matchInfo.lastExchangeId);
+        if ("data" in response) {
+            const matchInfo = parseOverlayInfo(response.data);
             return matchInfo;
-        } catch {
+        } else {
+            this.handleErrorStatus("queryMatchInfo", response.error, response.message);
             return null;
         }
+    }
+
+    private handleErrorStatus(functionName: string, error: ApiStatus, message?: string, ): void {
+        if (error === ApiStatus.NETWORK_ERROR) {
+            this._apiConnected = false;
+        } else if (error === ApiStatus.PARSING_ERROR) {
+            // Match info is not returning correct data
+            this._errorStatus = "Invalid match ID!"
+        } else {
+            console.error(`${functionName} status not handled: ${error} - ${message ?? '{}'}`);
+            return;
+        }
+        console.warn(`${functionName} failed with status: ${error}`);
     }
 }

@@ -21,7 +21,7 @@ const updateMatchState = () => {
 const doUpdate = async () => {
     updateMatchState();
     await matchState.updateMatch();
-    updateInterface(matchState.matchInfo);
+    updateInterface(matchState);
 };
 
 // Start loop

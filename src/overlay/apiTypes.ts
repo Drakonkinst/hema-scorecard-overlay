@@ -24,4 +24,3 @@ export const GetStreamOverlayInfoResponseSchema = z.object({
 
 export type NewExchangeResponse = z.infer<typeof NewExchangeResponseSchema>;
 export type GetStreamOverlayInfoResponse = z.infer<typeof GetStreamOverlayInfoResponseSchema>;
-

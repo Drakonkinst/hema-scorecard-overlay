@@ -3,60 +3,88 @@ import { GetStreamOverlayInfoResponseSchema, NewExchangeResponseSchema, type Get
 
 const VIDEO_STREAM_MATCH = 1;
 
+export enum ApiStatus {
+    OK = "Ok",
+    NETWORK_ERROR = "NetworkError",
+    API_ERROR = "ApiError",
+    PARSING_ERROR = "ParsingError"
+}
+
+interface ApiResponseError {
+    error: ApiStatus;
+    message?: string;
+};
+
+interface ApiResponseData<T> {
+    data: T;
+}
+
+export type ApiResponse<T> = ApiResponseError | ApiResponseData<T>;
+
 // Query newExchange which is a lightweight check returning the current
 // match time, and whether an exchange has been updated (which causes
 // a full refresh instead)
-export const checkNeedsRefresh = async (matchId: string, lastExchangeId: string): Promise<NewExchangeResponse> => {
+export const checkNeedsRefresh = async (matchId: string, lastExchangeId: string): Promise<ApiResponse<NewExchangeResponse>> => {
     const endpoint = `includes/functions/AJAX.php?mode=newExchange&matchID=${matchId}&exchangeID=${lastExchangeId}`;
     const url = wrapEndpoint(endpoint);
 
+    let response: Response;
     try {
-        const response = await fetch(url, {
+        response = await fetch(url, {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
             }
         });
-        if (!response.ok) {
-            throw new Error(`API call to newExchange failed (status code ${response.status})`);
-        }
-        const data = NewExchangeResponseSchema.parse(await response.json());
-        return data;
     } catch (error) {
         const errorMsg = error instanceof Error ? error.message : "Error while calling checkNeedsRefresh";
-        console.error(errorMsg);
-        return {
-            refresh: false,
-            matchTime: "-1",
-        }
+        return { error: ApiStatus.NETWORK_ERROR, message: errorMsg };
+    }
+
+    if (!response.ok) {
+        const errorMsg = `API call to newExchange failed (status code ${response.status})`;
+        return { error: ApiStatus.API_ERROR, message: errorMsg };
+    }
+
+    try {
+        const data = NewExchangeResponseSchema.parse(await response.json());
+        return { data };
+    } catch(error) {
+        const errorMsg = error instanceof Error ? error.message : "Error during input validation";
+        return { error: ApiStatus.PARSING_ERROR, message: errorMsg };
     }
 };
 
 // Queries getStreamOverlayInfo which grabs a bunch of useful data
 // Currently we are presenting to be VIDEO_STREAM_MATCH via the
 // streamMode option
-export const queryScorecardOverlayInfo = async (matchId: string, lastExchangeId: string): Promise<GetStreamOverlayInfoResponse|null> => {
+export const queryScorecardOverlayInfo = async (matchId: string, lastExchangeId: string): Promise<ApiResponse<GetStreamOverlayInfoResponse>> => {
     const endpoint = `includes/functions/AJAX.php?mode=getStreamOverlayInfo&streamMode=${VIDEO_STREAM_MATCH}&lastExchange=${lastExchangeId}&identifier=${matchId}&synchTime=0&synchTime2=0&videoTime=0`;
     const url = wrapEndpoint(endpoint);
+    let response: Response;
 
     try {
-        const response = await fetch(url, {
+        response = await fetch(url, {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
             }
         });
-        if (!response.ok) {
-            throw new Error(`API call to getStreamOverlayInfo failed (status code ${response.status})`);
-        }
-        const data = GetStreamOverlayInfoResponseSchema.parse(await response.json());
-        return data;
-    } catch (error) {
+    } catch(error) {
         const errorMsg = error instanceof Error ? error.message : "Error while calling getStreamOverlayInfo";
-        console.error(errorMsg);
-        return null;
+        return { error: ApiStatus.NETWORK_ERROR, message: errorMsg };
     }
-
+    if (!response.ok) {
+        const errorMsg = `API call to getStreamOverlayInfo failed (status code ${response.status})`;
+        return { error: ApiStatus.API_ERROR, message: errorMsg };
+    }
+    try {
+        const data = GetStreamOverlayInfoResponseSchema.parse(await response.json());
+        return { data };
+    } catch (error) {
+        const errorMsg = error instanceof Error ? error.message : "Error during input validation";
+        return { error: ApiStatus.PARSING_ERROR, message: errorMsg };
+    }
 }
 
 const wrapEndpoint = (endpoint: string) => {

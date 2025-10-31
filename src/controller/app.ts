@@ -1,4 +1,4 @@
-import { getOverlaySettings, setOverlaySettings, setCurrentMatchId } from "../utils/database";
+import { getOverlaySettings, setOverlaySettings, setCurrentMatchId, getCurrentMatchId } from "../utils/database";
 import { onChange, onClick, query } from "../utils/dom";
 import type { Settings } from "../utils/settings";
 
@@ -6,6 +6,60 @@ const CLASS_SUCCESS = "success";
 const CLASS_ERROR = "error";
 
 const setup = (): void => {
+    setupMatchIdInput();
+
+    addCheckbox("use-transparent-overlay", "useTransparentOverlay");
+    addCheckbox("use-local-cors-routing", "useLocalCorsRouting");
+    addCheckbox("switch-fighter-sides", "switchFighterSides");
+    addCheckbox("show-debug-info", "showDebugInfo");
+
+    console.log("Controller initialized");
+};
+
+/* General Helpers */
+
+const queryKey = <T extends Element>(key: string): T | null => {
+    return query<T>(selectorKey(key));
+};
+
+const selectorKey = (key: string): string => {
+    return `[data-key="${key}"]`
+};
+
+const changeSettings = (callback: (settings: Settings) => void): void => {
+    const settings = getOverlaySettings();
+    callback(settings);
+    setOverlaySettings(settings);
+};
+
+/* Checkbox */
+
+const addCheckbox = (key: string, property: keyof Settings): void => {
+    onChange(selectorKey(key), () => {
+        changeSettings(settings => {
+            const newValue = queryKey<HTMLInputElement>(key)?.checked ?? false;
+            settings[property] = newValue;
+        });
+    });
+
+    // Set the initial value
+    const element = queryKey<HTMLInputElement>(key)
+    if (element) {
+        element.checked = !!getOverlaySettings()[property];
+    }
+};
+
+/* Match ID Input */
+
+const setupMatchIdInput = (): void => {
+    const matchId = getCurrentMatchId();
+    if (matchId) {
+        const element = queryKey<HTMLInputElement>("match-id")
+        if (element) {
+            element.value = matchId;
+        }
+    }
+
     onClick(selectorKey("set-match-id"), () => {
         console.log("Setting match ID");
         const matchId = getMatchIdFromInput();
@@ -21,7 +75,8 @@ const setup = (): void => {
         // Clear entry field
         const matchIdEntry = queryKey<HTMLInputElement>("match-id");
         if (matchIdEntry) {
-            matchIdEntry.textContent = '';
+            matchIdEntry.value = '';
+            matchIdEntry.focus();
         }
 
         // Clear error message
@@ -31,48 +86,7 @@ const setup = (): void => {
             matchIdEntryResult.textContent = '';
         }
     });
-
-    onChange(selectorKey("use-transparent-overlay"), () => {
-        changeSettings(settings => {
-            const newValue = queryKey<HTMLInputElement>("use-transparent-overlay")?.checked ?? false;
-            settings.useTransparentOverlay = newValue;
-        });
-    });
-
-    onChange(selectorKey("use-local-cors-routing"), () => {
-        changeSettings(settings => {
-            const newValue = queryKey<HTMLInputElement>("use-local-cors-routing")?.checked ?? false;
-            settings.useLocalCorsRouting = newValue;
-        });
-    });
-
-    onChange(selectorKey("switch-fighter-sides"), () => {
-        changeSettings(settings => {
-            const newValue = queryKey<HTMLInputElement>("switch-fighter-sides")?.checked ?? false;
-            settings.switchFighterSides = newValue;
-        });
-    });
-
-    console.log("Controller initialized");
-}
-
-/* General Helpers */
-
-const queryKey = <T extends Element>(key: string): T | null => {
-    return query<T>(selectorKey(key));
-}
-
-const selectorKey = (key: string): string => {
-    return `[data-key="${key}"]`
-}
-
-const changeSettings = (callback: (settings: Settings) => void): void => {
-    const settings = getOverlaySettings();
-    callback(settings);
-    setOverlaySettings(settings);
-}
-
-/* Match ID Input */
+};
 
 const getMatchIdFromInput = (): string | null => {
     // Make sure the entry field exists
