@@ -2,7 +2,7 @@ import z from "zod";
 
 export const NewExchangeResponseSchema = z.object({
     refresh: z.boolean(),
-    matchTime: z.string().nullable()
+    matchTime: z.int().nullable()
 });
 
 export const GetStreamOverlayInfoResponseSchema = z.object({

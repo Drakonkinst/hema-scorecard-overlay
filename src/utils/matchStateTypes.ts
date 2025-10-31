@@ -1,5 +1,4 @@
 import z from "zod";
-import { doublesToStr, timeToStr } from "../overlay/dataParsing";
 
 export const FighterInfoSchema = z.object({
     name: z.string(),
@@ -14,7 +13,7 @@ export const MatchInfoSchema = z.object({
     fighter1: FighterInfoSchema,
     fighter2: FighterInfoSchema,
     doubles: z.int().nonnegative(),
-    matchTime: z.string(), // Display string
+    matchTime: z.int().nonnegative(),
     lastExchangeId: z.string()
 });
 
@@ -29,7 +28,7 @@ export type PartialMatchInfo = z.infer<typeof PartialMatchInfoSchema>;
 
 export interface MatchUpdate {
     needsRefresh: boolean;
-    matchTime: string | null;
+    matchTime: number | null;
 };
 
 export const getBlankMatchInfo = (): MatchInfo => {
@@ -46,7 +45,7 @@ export const getBlankMatchInfo = (): MatchInfo => {
             score: 0
         },
         doubles: 0,
-        matchTime: timeToStr(0),
+        matchTime: 0,
         lastExchangeId: "-1"
     };
 };

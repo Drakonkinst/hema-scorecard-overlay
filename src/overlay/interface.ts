@@ -1,9 +1,9 @@
 import { getOverlaySettings } from "../utils/database";
 import { setText, setBackgroundColor, setTextColor, getClassList } from "../utils/dom";
 import type { MatchInfo } from "../utils/matchStateTypes";
-import { doublesToStr } from "./dataParsing";
 import type { MatchState } from "./matchState";
 
+const SECONDS_PER_MINUTE = 60;
 const VAR_DEFAULT_BACKGROUND_COLOR = 'var(--overlay-secondary-background-color)';
 const VAR_DEFAULT_TEXT_COLOR = 'var(--overlay-secondary-text-color)';
 const TRANSPARENT = 'transparent';
@@ -67,6 +67,30 @@ export const updateInterface = (matchState: MatchState) => {
     setText(".fighter-1-score", fighter1.score.toString());
     setText(".fighter-2-score", fighter2.score.toString());
     setText(".doubles", `Doubles: ${doublesToStr(matchInfo.doubles)}`);
-    setText(".match-time", matchInfo.matchTime);
+    setText(".match-time", timeToStr(matchInfo.matchTime));
 }
+
+const timeToStr = (time: number) => {
+    const minutes = Math.floor(time / SECONDS_PER_MINUTE);
+    const seconds = Math.floor(time % SECONDS_PER_MINUTE);
+    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+};
+
+const doublesToStr = (doubles: number) => {
+    let doubleStr = doubles.toString();
+    const funMode = getOverlaySettings().funMode ?? true;
+    if (!funMode) {
+        return doubleStr;
+    }
+    if (doubles <= 0) {
+        doubleStr += " :)";
+    } else if (doubles === 2) {
+        doubleStr += " :(";
+    } else {
+        for (let i = 2; i < Math.min(doubles, 9); ++i) {
+            doubleStr += "!";
+        }
+    }
+    return doubleStr;
+};
 
