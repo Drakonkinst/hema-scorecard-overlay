@@ -1,5 +1,8 @@
 .controller-wrapper {
-    margin: 2rem;
+    padding: 2rem;
+    min-height: 100%;
+    display: flex;
+    flex-flow: column nowrap;
 }
 
 h2 {

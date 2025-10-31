@@ -11,10 +11,11 @@
 }
 
 :root {
+    /* I don't understand colors. Luckily this site does: https://www.hover.dev/css-color-palette-generator */
     --primary-text-color: #0a0a0a;
     --primary-background-color: #fefefe;
-    --primary-button-background-color: gold;
-    --primary-button-highlight-background-color: rgb(250, 229, 114);
+    --primary-button-background-color: #ffd700;
+    --primary-button-highlight-background-color: #ffdf33;
 }
 
 html, body {
@@ -70,4 +71,16 @@ h2 {
 }
 .tertiary-button:hover {
     background-color: #cccccc;
+}
+
+.credits {
+    margin-top: auto;
+    text-align: right;
+    align-self: flex-end;
+    font-size: 0.75em;
+}
+
+.credits,
+.credits a {
+    color: #a0a0a0
 }
