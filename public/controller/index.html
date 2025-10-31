@@ -13,7 +13,7 @@
 <body>
     <div class="controller-wrapper">
         <h1>Overlay Configuration</h1>
-        <div class="enter-match-id-container">
+        <div class="enter-match-id-container" title="Enter the match URL from HEMA Scorecard, or just the match ID if you want.">
             <h2>Match Data</h2>
             <div class="enter-match-id-inputs">
                 <label>Paste Match URL here: </label>
@@ -31,21 +31,21 @@
         </div>
 
         <h2>Settings</h2>
-        <div class="checkbox-container">
+        <div class="checkbox-container" title="Check this if you have your own image overlay you want to use as a background instead.">
             <input type="checkbox" data-key="use-transparent-overlay" /> <label>Use Transparent Overlay</label>
         </div>
-        <div class="checkbox-container">
+        <div class="checkbox-container" title="Check this if you want to switch the overlay sides to match the camera angle.">
             <input type="checkbox" data-key="switch-fighter-sides" /> <label>Switch Fighter Sides</label>
         </div>
         <!-- Advanced -->
         <h2>Advanced</h2>
-        <div class="checkbox-container">
-            <input type="checkbox" data-key="use-local-cors-routing" /> <label>Use Local Cors Routing</label>
-        </div>
-        <div class="checkbox-container">
+        <div class="checkbox-container" title="Check this if you want to display debug info on the overlay screen.">
             <input type="checkbox" data-key="show-debug-info" /> <label>Show Debug Info</label>
         </div>
-        <div class="checkbox-container">
+        <div class="checkbox-container" title="Check this if you're running your own local CORS server and want to use that instead of hemascorecard.com directly.">
+            <input type="checkbox" data-key="use-local-cors-routing" /> <label>Use Local Cors Routing</label>
+        </div>
+        <div class="checkbox-container" title="Uncheck this if you hate fun.">
             <input type="checkbox" data-key="fun-mode" /> <label>Fun Mode</label>
         </div>
     </div>

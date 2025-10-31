@@ -66,7 +66,7 @@ export const updateInterface = (matchState: MatchState) => {
 
     setText(".fighter-1-score", fighter1.score.toString());
     setText(".fighter-2-score", fighter2.score.toString());
-    setText(".doubles", `Doubles: ${doublesToStr(matchInfo.doubles)}`);
+    setText(".doubles", `Doubles: ${doublesToStr(matchInfo.doubles, !settings.funMode)}`);
     setText(".match-time", timeToStr(matchInfo.matchTime));
 }
 
@@ -76,10 +76,9 @@ const timeToStr = (time: number) => {
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
 };
 
-const doublesToStr = (doubles: number) => {
+const doublesToStr = (doubles: number, numberOnly: boolean) => {
     let doubleStr = doubles.toString();
-    const funMode = getOverlaySettings().funMode ?? true;
-    if (!funMode) {
+    if (numberOnly) {
         return doubleStr;
     }
     if (doubles <= 0) {
