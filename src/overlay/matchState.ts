@@ -20,7 +20,7 @@ export class MatchState {
     public async updateMatch(): Promise<void> {
         // Do no queries if it the match ID is blank
         if (!this._matchId) {
-            this._errorStatus = "No match ID set!";
+            this._errorStatus = "You must provide a match link!";
             return;
         }
 
