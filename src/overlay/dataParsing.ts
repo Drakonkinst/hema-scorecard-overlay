@@ -1,6 +1,7 @@
 import type { MatchUpdate } from "../utils/matchStateTypes";
 import type { GetStreamOverlayInfoResponse, NewExchangeResponse } from "./apiTypes";
 import type { MatchInfo } from "../utils/matchStateTypes";
+import { getOverlaySettings } from "../utils/database";
 
 const SECONDS_PER_MINUTE = 60;
 
@@ -21,7 +22,7 @@ export const parseOverlayInfo = (data: GetStreamOverlayInfoResponse): MatchInfo 
             backgroundColor: data.color2Code,
             textColor: data.color2Contrast
         },
-        doubles: doublesToStr(parseInt(data.doubles)),
+        doubles: parseInt(data.doubles),
         matchTime: timeToStr(parseInt(data.matchTime)),
         lastExchangeId: data.lastExchange.toString()
     };
@@ -52,9 +53,10 @@ export const timeToStr = (time: number) => {
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
 };
 
-export const doublesToStr = (doubles: number, numberOnly: boolean = false) => {
+export const doublesToStr = (doubles: number) => {
     let doubleStr = doubles.toString();
-    if (numberOnly) {
+    const funMode = getOverlaySettings().funMode ?? true;
+    if (!funMode) {
         return doubleStr;
     }
     if (doubles <= 0) {

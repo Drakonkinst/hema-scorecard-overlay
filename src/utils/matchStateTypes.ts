@@ -13,7 +13,7 @@ export const MatchInfoSchema = z.object({
     tournamentName: z.string(),
     fighter1: FighterInfoSchema,
     fighter2: FighterInfoSchema,
-    doubles: z.string(), // Display string
+    doubles: z.int().nonnegative(),
     matchTime: z.string(), // Display string
     lastExchangeId: z.string()
 });
@@ -45,7 +45,7 @@ export const getBlankMatchInfo = (): MatchInfo => {
             school: '',
             score: 0
         },
-        doubles: doublesToStr(0),
+        doubles: 0,
         matchTime: timeToStr(0),
         lastExchangeId: "-1"
     };

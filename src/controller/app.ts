@@ -12,6 +12,7 @@ const setup = (): void => {
     addCheckbox("use-local-cors-routing", "useLocalCorsRouting");
     addCheckbox("switch-fighter-sides", "switchFighterSides");
     addCheckbox("show-debug-info", "showDebugInfo");
+    addCheckbox("fun-mode", "funMode", true);
 
     console.log("Controller initialized");
 };
@@ -34,10 +35,10 @@ const changeSettings = (callback: (settings: Settings) => void): void => {
 
 /* Checkbox */
 
-const addCheckbox = (key: string, property: keyof Settings): void => {
+const addCheckbox = (key: string, property: keyof Settings, defaultValue = false): void => {
     onChange(selectorKey(key), () => {
         changeSettings(settings => {
-            const newValue = queryKey<HTMLInputElement>(key)?.checked ?? false;
+            const newValue = queryKey<HTMLInputElement>(key)?.checked ?? defaultValue;
             settings[property] = newValue;
         });
     });
@@ -45,7 +46,7 @@ const addCheckbox = (key: string, property: keyof Settings): void => {
     // Set the initial value
     const element = queryKey<HTMLInputElement>(key)
     if (element) {
-        element.checked = !!getOverlaySettings()[property];
+        element.checked = getOverlaySettings()[property] ?? defaultValue;
     }
 };
 

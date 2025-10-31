@@ -1,6 +1,7 @@
 import { getOverlaySettings } from "../utils/database";
 import { setText, setBackgroundColor, setTextColor, getClassList } from "../utils/dom";
 import type { MatchInfo } from "../utils/matchStateTypes";
+import { doublesToStr } from "./dataParsing";
 import type { MatchState } from "./matchState";
 
 const VAR_DEFAULT_BACKGROUND_COLOR = 'var(--overlay-secondary-background-color)';
@@ -47,7 +48,7 @@ export const updateInterface = (matchState: MatchState) => {
             setText(".debug-scorecard-api-status", "Connected");
             getClassList(".debug-scorecard-api-status")?.remove("error");
         } else {
-            setText(".debug-scorecard-api-status", "Not Connected");
+            setText(".debug-scorecard-api-status", matchState.errorMessage ? "Waiting" : "Not Connected");
             getClassList(".debug-scorecard-api-status")?.add("error");
         }
     } else {
@@ -65,7 +66,7 @@ export const updateInterface = (matchState: MatchState) => {
 
     setText(".fighter-1-score", fighter1.score.toString());
     setText(".fighter-2-score", fighter2.score.toString());
-    setText(".doubles", `Doubles: ${matchInfo.doubles}`);
+    setText(".doubles", `Doubles: ${doublesToStr(matchInfo.doubles)}`);
     setText(".match-time", matchInfo.matchTime);
 }
 
