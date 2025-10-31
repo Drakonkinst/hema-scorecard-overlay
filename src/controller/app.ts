@@ -19,7 +19,7 @@ const setup = (): void => {
 
 /* General Helpers */
 
-const queryKey = <T extends Element>(key: string): T | null => {
+const queryKey = <T extends Element = HTMLElement>(key: string): T | null => {
     return query<T>(selectorKey(key));
 };
 
@@ -53,12 +53,17 @@ const addCheckbox = (key: string, property: keyof Settings, defaultValue = false
 /* Match ID Input */
 
 const setupMatchIdInput = (): void => {
-    const matchId = getCurrentMatchId();
-    if (matchId) {
-        const element = queryKey<HTMLInputElement>("match-id")
-        if (element) {
-            element.value = matchId;
+    const inputElement = queryKey<HTMLInputElement>("match-id");
+    if (inputElement) {
+        const matchId = getCurrentMatchId();
+        if (matchId) {
+            inputElement.value = matchId;
         }
+        inputElement.addEventListener("keypress", event => {
+            if (event.key === "Enter") {
+                queryKey("set-match-id")?.click();
+            }
+        });
     }
 
     onClick(selectorKey("set-match-id"), () => {
