@@ -97,6 +97,7 @@ export class MatchState {
             console.error(`${functionName} status not handled: ${error} - ${message ?? '{}'}`);
             return;
         }
-        console.warn(`${functionName} failed with status: ${error}`);
+        // console.warn(`${functionName} failed with status: ${error}`);
+        console.warn(`${functionName} failed with status: ${error} - ${message}`);
     }
 }

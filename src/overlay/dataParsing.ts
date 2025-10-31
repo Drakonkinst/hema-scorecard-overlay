@@ -32,14 +32,15 @@ export const parseNewExchangeResponse = (data: NewExchangeResponse): MatchUpdate
             matchTime: null
         };
     };
-    if (data.matchTime != null) {
-        if (data.matchTime > 0) {
+    if (data.matchTime) {
+        const matchTime = parseInt(data.matchTime);
+        if (!isNaN(matchTime)) {
             return {
                 needsRefresh: false,
-                matchTime: data.matchTime
+                matchTime
             };
         }
     }
     throw new Error(`Could not parse NewExchangeResponse ${data}`);
-}
+};
 
