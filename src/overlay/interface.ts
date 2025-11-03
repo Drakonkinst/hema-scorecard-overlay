@@ -1,13 +1,14 @@
 import fitty from "fitty";
 import { getOverlaySettings } from "../utils/database";
-import { setText, setBackgroundColor, setTextColor, getClassList } from "../utils/dom";
+import { setText, getClassList, query } from "../utils/dom";
 import type { MatchInfo } from "../utils/matchStateTypes";
 import type { MatchState } from "./matchState";
 
 const SECONDS_PER_MINUTE = 60;
-const VAR_DEFAULT_BACKGROUND_COLOR = 'var(--overlay-secondary-background-color)';
-const VAR_DEFAULT_TEXT_COLOR = 'var(--overlay-secondary-text-color)';
-const TRANSPARENT = 'transparent';
+const VAR_DEFAULT_BACKGROUND_COLOR = 'var(--overlay-fighter-default-background-color)';
+const VAR_DEFAULT_TEXT_COLOR = 'var(--overlay-fighter-default-text-color)';
+const VAR_TRANSPARENT_TEXT_COLOR = 'var(--overlay-fighter-transparent-text-color)';
+const VAR_TRANSPARENT_BACKGROUND_COLOR = 'transparent';
 const BASE_REM = 20;
 
 export const initInterface = () => {
@@ -48,10 +49,10 @@ export const updateInterface = (matchState: MatchState) => {
     let fighter2TextColor = fighter2.textColor || VAR_DEFAULT_TEXT_COLOR;
 
     if (useTransparentOverlay) {
-        fighter1BackgroundColor = TRANSPARENT;
-        fighter2BackgroundColor = TRANSPARENT;
-        fighter1TextColor = VAR_DEFAULT_TEXT_COLOR;
-        fighter2TextColor = VAR_DEFAULT_TEXT_COLOR;
+        fighter1BackgroundColor = VAR_TRANSPARENT_BACKGROUND_COLOR;
+        fighter2BackgroundColor = VAR_TRANSPARENT_BACKGROUND_COLOR;
+        fighter1TextColor = VAR_TRANSPARENT_TEXT_COLOR;
+        fighter2TextColor = VAR_TRANSPARENT_TEXT_COLOR;
         getClassList("body")?.add("transparent");
     } else {
         getClassList("body")?.remove("transparent");
@@ -78,10 +79,13 @@ export const updateInterface = (matchState: MatchState) => {
     setText(".fighter-2-info .fighter-name", fighter2.name);
     setText(".fighter-1-info .fighter-school", fighter1.school || '');
     setText(".fighter-2-info .fighter-school", fighter2.school || '');
-    setBackgroundColor(".fighter-1-info", fighter1BackgroundColor);
-    setBackgroundColor(".fighter-2-info", fighter2BackgroundColor);
-    setTextColor(".fighter-1-info", fighter1TextColor);
-    setTextColor(".fighter-2-info", fighter2TextColor);
+    const bodyEl = query("body");
+    if (bodyEl) {
+        bodyEl.style.setProperty("--overlay-fighter-1-text-color", fighter1TextColor);
+        bodyEl.style.setProperty("--overlay-fighter-2-text-color", fighter2TextColor);
+        bodyEl.style.setProperty("--overlay-fighter-1-background-color", fighter1BackgroundColor);
+        bodyEl.style.setProperty("--overlay-fighter-2-background-color", fighter2BackgroundColor);
+    }
 
     setText(".fighter-1-score", fighter1.score.toString());
     setText(".fighter-2-score", fighter2.score.toString());

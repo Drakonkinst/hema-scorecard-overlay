@@ -1,18 +1,21 @@
 body {
-    color: var(--overlay-primary-text-color);
+    color: var(--overlay-score-text-color);
     background-color: #0a0a0a;
-    --overlay-border-color: #fefefe;
-    --overlay-primary-text-color: #fefefe;
-    --overlay-primary-background-color: #3d3f75;
-    --overlay-secondary-text-color: var(--primary-text-color);
-    --overlay-secondary-background-color: #fefefe;
+    --overlay-score-border-color: #fefefe;
+    --overlay-score-text-color: #fefefe;
+    --overlay-score-background-color: #3d3f75;
+    --overlay-fighter-default-text-color: var(--primary-text-color);
+    --overlay-fighter-default-background-color: #fefefe;
+    --overlay-fighter-transparent-text-color: #fefefe;
+    --overlay-fighter-1-text-color: var(--overlay-fighter-default-text-color);
+    --overlay-fighter-1-background-color: var(--overlay-fighter-default-background-color);
+    --overlay-fighter-2-text-color: var(--overlay-fighter-default-text-color);
+    --overlay-fighter-2-background-color: var(--overlay-fighter-default-background-color);
 }
 
 body.transparent {
-    --overlay-border-color: transparent;
-    --overlay-primary-background-color: transparent;
-    --overlay-secondary-background-color: transparent;
-    --overlay-secondary-text-color: #fefefe;
+    --overlay-score-border-color: transparent;
+    --overlay-score-background-color: transparent;
 }
 
 .overlay-wrapper {
@@ -38,7 +41,7 @@ body.transparent {
 }
 
 .overlay-header {
-    background-color: var(--overlay-primary-background-color);
+    background-color: var(--overlay-score-background-color);
     text-align: center;
     border-radius: 15px;
     font-size: 4rem;
@@ -61,7 +64,7 @@ body.transparent {
 .score-container {
     display: flex;
     flex-flow: column nowrap;
-    background-color: var(--overlay-primary-background-color);
+    background-color: var(--overlay-score-background-color);
     text-align: center;
     border-radius: 15px;
     width: 18.75rem;
@@ -87,11 +90,11 @@ body.transparent {
 }
 
 .fighter-1-score {
-    border-right: 1px solid var(--overlay-border-color);
+    border-right: 1px solid var(--overlay-score-border-color);
 }
 
 .doubles {
-    border-top: 1px solid var(--overlay-border-color);
+    border-top: 1px solid var(--overlay-score-border-color);
     padding-bottom: 0.5rem;
     padding-top: 0.5rem;
     font-size: 1.25rem;
@@ -104,8 +107,8 @@ body.transparent {
     flex: 1;
     padding-top: 1rem;
     padding-bottom: 1rem;
-    background-color: var(--overlay-secondary-background-color);
-    color: var(--overlay-secondary-text-color);
+    background-color: var(--overlay-fighter-default-background-color);
+    color: var(--overlay-fighter-default-text-color);
     overflow: hidden;
 }
 
@@ -114,6 +117,8 @@ body.transparent {
     padding-right: 1.25rem;
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
+    color: var(--overlay-fighter-1-text-color);
+    background-color: var(--overlay-fighter-1-background-color);
 }
 
 .fighter-2-info {
@@ -122,6 +127,8 @@ body.transparent {
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
     text-align: end;
+    color: var(--overlay-fighter-2-text-color);
+    background-color: var(--overlay-fighter-2-background-color);
 }
 
 .fighter-name-container {
