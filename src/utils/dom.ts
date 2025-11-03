@@ -17,11 +17,13 @@ export const queryAll = <T extends Element = HTMLElement>(selector: string): Nod
     return element;
 }
 
-export const setText = (selector: string, value: string): void => {
+export const setText = (selector: string, value: string): boolean => {
     const element = query(selector);
-    if (element) {
+    if (element && element.textContent !== value) {
         element.textContent = value;
+        return true;
     }
+    return false;
 };
 
 export const setBackgroundColor = (selector: string, value: string): void => {

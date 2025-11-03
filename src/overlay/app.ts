@@ -1,5 +1,5 @@
 import { getCurrentMatchId } from "../utils/database";
-import { updateInterface } from "./interface";
+import { initInterface, updateInterface } from "./interface";
 import { MatchState } from "./matchState";
 
 const UPDATE_INTERVAL = 1 * 1000; // Every second
@@ -23,6 +23,8 @@ const doUpdate = async () => {
     await matchState.updateMatch();
     updateInterface(matchState);
 };
+
+initInterface();
 
 // Start loop
 setInterval(doUpdate, UPDATE_INTERVAL);

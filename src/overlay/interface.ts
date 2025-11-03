@@ -1,3 +1,4 @@
+import fitty from "fitty";
 import { getOverlaySettings } from "../utils/database";
 import { setText, setBackgroundColor, setTextColor, getClassList } from "../utils/dom";
 import type { MatchInfo } from "../utils/matchStateTypes";
@@ -7,6 +8,24 @@ const SECONDS_PER_MINUTE = 60;
 const VAR_DEFAULT_BACKGROUND_COLOR = 'var(--overlay-secondary-background-color)';
 const VAR_DEFAULT_TEXT_COLOR = 'var(--overlay-secondary-text-color)';
 const TRANSPARENT = 'transparent';
+const BASE_REM = 20;
+
+export const initInterface = () => {
+    // For some reason, this shrinks when the window does but doesn't re-expand.
+    // Ah well, shouldn't matter for this use case.
+    fitty(".fighter-1-info .fighter-name", {
+        maxSize: 3 * BASE_REM,
+    });
+    fitty(".fighter-1-info .fighter-school", {
+        maxSize: 1.25 * BASE_REM,
+    });
+    fitty(".fighter-2-info .fighter-name", {
+        maxSize: 3 * BASE_REM,
+    });
+    fitty(".fighter-2-info .fighter-school", {
+        maxSize: 1.25 * BASE_REM,
+    });
+};
 
 export const updateInterface = (matchState: MatchState) => {
     const matchInfo: MatchInfo = matchState.matchInfo;

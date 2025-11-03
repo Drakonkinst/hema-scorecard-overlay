@@ -10,6 +10,7 @@
     "start": "node ./build/serve.js"
   },
   "dependencies": {
+    "fitty": "^2.4.2",
     "zod": "^4.1.12"
   },
   "devDependencies": {
