@@ -21,6 +21,7 @@ const updateMatchState = () => {
 const doUpdate = async () => {
     updateMatchState();
     await matchState.updateMatch();
+    // TODO: Apply overrides to match info
     updateInterface(matchState);
 };
 

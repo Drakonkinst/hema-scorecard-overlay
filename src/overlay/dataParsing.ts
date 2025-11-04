@@ -20,7 +20,7 @@ export const parseOverlayInfo = (data: GetStreamOverlayInfoResponse): MatchInfo 
             textColor: data.color2Contrast
         },
         doubles: parseInt(data.doubles),
-        matchTime: parseInt(data.matchTime),
+        matchTime: parseInt(data.matchTime ?? '0'),
         lastExchangeId: data.lastExchange.toString()
     };
 };
@@ -32,15 +32,13 @@ export const parseNewExchangeResponse = (data: NewExchangeResponse): MatchUpdate
             matchTime: null
         };
     };
-    if (data.matchTime) {
-        const matchTime = parseInt(data.matchTime);
-        if (!isNaN(matchTime)) {
-            return {
-                needsRefresh: false,
-                matchTime
-            };
-        }
+    const matchTime = parseInt(data.matchTime ?? '0');
+    if (!isNaN(matchTime)) {
+        return {
+            needsRefresh: false,
+            matchTime
+        };
     }
-    throw new Error(`Could not parse NewExchangeResponse ${data}`);
+    throw new Error(`Could not parse NewExchangeResponse ${JSON.stringify(data)}`);
 };
 

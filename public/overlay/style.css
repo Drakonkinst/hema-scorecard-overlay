@@ -136,21 +136,18 @@ body.transparent {
     flex-flow: column nowrap;
     justify-content: center;
     flex: 1;
-    /* width: fit-content; */
 }
 
 .fighter-name {
-    /* width: fit-content; */
     font-size: 3rem;
     display: inline-block;
-    white-space: nowrap,
+    white-space: nowrap;
 }
 
 .fighter-school {
     font-size: 1.25rem;
     display: inline-block;
-    white-space: nowrap,
-    /* width: fit-content; */
+    white-space: nowrap;
 }
 
 .overlay-debug-info {

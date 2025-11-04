@@ -19,7 +19,7 @@ export const GetStreamOverlayInfoResponseSchema = z.object({
     color2Contrast: z.string(),
     doubles: z.string(),
     lastExchange: z.int(),
-    matchTime: z.string()
+    matchTime: z.string().nullable(),
 });
 
 export type NewExchangeResponse = z.infer<typeof NewExchangeResponseSchema>;
