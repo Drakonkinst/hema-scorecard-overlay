@@ -30,7 +30,7 @@ input[type='number'] {
     -webkit-appearance: textfield;
     -moz-appearance: textfield;
     appearance: textfield;
-    border: solid #aaa;
+    border: solid #aaaaaa;
     border-width: 0 1px;
     max-width: 3rem;
     text-align: center;
@@ -222,7 +222,8 @@ input[type=number]::-webkit-outer-spin-button {
 .override-buttons {
     display: flex;
     flex-flow: row wrap;
-    gap: 1rem;
+    column-gap: 1rem;
+    row-gap: 0.5rem;
     justify-content: center;
     border-top: 2px solid #666666;
     padding-top: 0.5rem;
@@ -230,4 +231,5 @@ input[type=number]::-webkit-outer-spin-button {
 
 .override-buttons .button {
     font-weight: bold;
+    border-color: #aaaaaa;
 }

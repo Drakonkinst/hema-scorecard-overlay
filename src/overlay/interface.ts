@@ -43,14 +43,12 @@ export const updateInterface = (matchState: MatchState) => {
 
     let fighter1BackgroundColor = fighter1.backgroundColor || VAR_DEFAULT_BACKGROUND_COLOR;
     let fighter2BackgroundColor = fighter2.backgroundColor || VAR_DEFAULT_BACKGROUND_COLOR;
-    let fighter1TextColor = fighter1.textColor || VAR_DEFAULT_TEXT_COLOR;
-    let fighter2TextColor = fighter2.textColor || VAR_DEFAULT_TEXT_COLOR;
+    const fighter1TextColor = fighter1.textColor || (useTransparentOverlay ? VAR_TRANSPARENT_TEXT_COLOR : VAR_DEFAULT_TEXT_COLOR);
+    const fighter2TextColor = fighter2.textColor || (useTransparentOverlay ? VAR_TRANSPARENT_TEXT_COLOR : VAR_DEFAULT_TEXT_COLOR);
 
     if (useTransparentOverlay) {
         fighter1BackgroundColor = VAR_TRANSPARENT_BACKGROUND_COLOR;
         fighter2BackgroundColor = VAR_TRANSPARENT_BACKGROUND_COLOR;
-        fighter1TextColor = VAR_TRANSPARENT_TEXT_COLOR;
-        fighter2TextColor = VAR_TRANSPARENT_TEXT_COLOR;
         getClassList("body")?.add("transparent");
     } else {
         getClassList("body")?.remove("transparent");

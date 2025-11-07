@@ -354,6 +354,9 @@ const clearOverrides = (): void => {
     const increaseMatchTime = queryKey<HTMLInputElement>("increase-match-time");
     if (increaseMatchTime) {
         increaseMatchTime.checked = false;
+        changeSettings(settings => {
+            settings.increaseMatchTime = false;
+        });
     }
     suppressAutoUpdates = false;
     autoUpdateOverrides();

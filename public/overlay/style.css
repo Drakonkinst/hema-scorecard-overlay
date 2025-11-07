@@ -1,6 +1,6 @@
 body {
     color: var(--overlay-score-text-color);
-    background-color: #0a0a0a;
+    background-color: #bababa;
     --overlay-score-border-color: var(--secondary-text-color);
     --overlay-score-text-color: var(--secondary-text-color);
     --overlay-score-background-color: #3d3f75;
@@ -86,7 +86,6 @@ body.transparent {
     height: 6.75rem;
     padding-left: 0.25rem;
     padding-right: 0.25rem;
-    overflow: scroll;
 }
 
 .fighter-1-score {
