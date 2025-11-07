@@ -331,6 +331,7 @@ const setDefaultOverrides = (): void => {
     setMatchOverrides(matchInfo);
     initOverrideFieldsFromData();
     updateOverrides();
+    haltMatchTimer();
 }
 
 const clearInputField = (key: string, element: HTMLInputElement): void => {
@@ -351,6 +352,12 @@ const clearOverrides = (): void => {
             clearInputField(key, element);
         }
     }
+    haltMatchTimer();
+    suppressAutoUpdates = false;
+    autoUpdateOverrides();
+}
+
+const haltMatchTimer = (): void => {
     const increaseMatchTime = queryKey<HTMLInputElement>("increase-match-time");
     if (increaseMatchTime) {
         increaseMatchTime.checked = false;
@@ -358,8 +365,6 @@ const clearOverrides = (): void => {
             settings.increaseMatchTime = false;
         });
     }
-    suppressAutoUpdates = false;
-    autoUpdateOverrides();
 }
 
 const autoUpdateOverrides = (): void => {
