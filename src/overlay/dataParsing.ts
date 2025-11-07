@@ -10,18 +10,18 @@ export const parseOverlayInfo = (data: GetStreamOverlayInfoResponse): MatchInfo 
             school: data.fighter1School ?? undefined,
             score: parseInt(data.fighter1Score),
             backgroundColor: data.color1Code,
-            textColor: data.color1Contrast
+            textColor: data.color1Contrast,
         },
         fighter2: {
             name: data.fighter2Name,
             school: data.fighter2School ?? undefined,
             score: parseInt(data.fighter2Score),
             backgroundColor: data.color2Code,
-            textColor: data.color2Contrast
+            textColor: data.color2Contrast,
         },
         doubles: parseInt(data.doubles),
         matchTime: parseInt(data.matchTime ?? '0'),
-        lastExchangeId: data.lastExchange.toString()
+        lastExchangeId: data.lastExchange.toString(),
     };
 };
 

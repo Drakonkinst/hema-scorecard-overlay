@@ -3,6 +3,7 @@ import { getBlankMatchInfo, type MatchUpdate } from "../utils/matchStateTypes";
 import { type MatchInfo } from "../utils/matchStateTypes";
 import { ApiStatus, checkNeedsRefresh, queryScorecardOverlayInfo, type ApiResponse } from "./scorecardApi";
 import type { GetStreamOverlayInfoResponse, NewExchangeResponse } from "./apiTypes";
+import { setCurrentMatchInfo } from "../utils/database";
 
 export class MatchState {
     private readonly _matchId: string;
@@ -36,10 +37,12 @@ export class MatchState {
                 return;
             }
             this._matchInfo = newMatchInfo;
+            setCurrentMatchInfo(this._matchInfo);
             this.clearErrors();
             // console.log(JSON.stringify(this._matchInfo, null, 4));
-        } else if (matchUpdate.matchTime != null) {
+        } else if (matchUpdate.matchTime !== null) {
             this._matchInfo.matchTime = matchUpdate.matchTime;
+            setCurrentMatchInfo(this._matchInfo);
             this.clearErrors();
             // console.log("Match Time:", this._matchInfo.matchTime);
         }

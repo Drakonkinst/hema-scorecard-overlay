@@ -1,13 +1,14 @@
-import { PartialMatchInfoSchema, type PartialMatchInfo } from "./matchStateTypes";
+import { getBlankMatchInfo, MatchInfoSchema, PartialMatchInfoSchema, type MatchInfo, type PartialMatchInfo } from "./matchStateTypes";
 import { createDefaultSettings, SettingsSchema, type Settings } from "./settings";
 
 const KEY_CURRENT_MATCH_ID = "currentMatchId";
 const KEY_SETTINGS = "overlaySettings";
 const KEY_MATCH_OVERRIDES = "matchOverrides";
+const KEY_CURRENT_MATCH_INFO = "currentMatchInfo"; // This one is set by the overlay instead of config
 
 export const getCurrentMatchId = (): string | null => {
     return localStorage.getItem(KEY_CURRENT_MATCH_ID);
-}
+};
 
 export const getOverlaySettings = (): Settings => {
     const rawValue = localStorage.getItem(KEY_SETTINGS);
@@ -19,7 +20,7 @@ export const getOverlaySettings = (): Settings => {
         }
     }
     return createDefaultSettings();
-}
+};
 
 export const getMatchOverrides = (): PartialMatchInfo => {
     const rawValue = localStorage.getItem(KEY_MATCH_OVERRIDES);
@@ -31,6 +32,18 @@ export const getMatchOverrides = (): PartialMatchInfo => {
         }
     }
     return {};
+};
+
+export const getCurrentMatchInfo = (): MatchInfo => {
+    const rawValue = localStorage.getItem(KEY_CURRENT_MATCH_INFO);
+    if (rawValue) {
+        try {
+            return MatchInfoSchema.parse(JSON.parse(rawValue));
+        } catch (err) {
+            console.warn("Failed to retrieve settings", err);
+        }
+    }
+    return getBlankMatchInfo();
 }
 
 export const setCurrentMatchId = (matchId: string | null) => {
@@ -47,4 +60,8 @@ export const setOverlaySettings = (settings: Settings): void => {
 
 export const setMatchOverrides = (partialMatchInfo: PartialMatchInfo): void => {
     localStorage.setItem(KEY_MATCH_OVERRIDES, JSON.stringify(partialMatchInfo));
+}
+
+export const setCurrentMatchInfo = (matchInfo: MatchInfo): void => {
+    localStorage.setItem(KEY_CURRENT_MATCH_INFO, JSON.stringify(matchInfo));
 }

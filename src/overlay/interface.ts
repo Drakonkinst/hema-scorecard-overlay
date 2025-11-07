@@ -3,6 +3,7 @@ import { getOverlaySettings } from "../utils/database";
 import { setText, getClassList, query } from "../utils/dom";
 import type { MatchInfo } from "../utils/matchStateTypes";
 import type { MatchState } from "./matchState";
+import { applyMatchOverrides } from "./overrides";
 
 const SECONDS_PER_MINUTE = 60;
 const VAR_DEFAULT_BACKGROUND_COLOR = 'var(--overlay-fighter-default-background-color)';
@@ -29,10 +30,7 @@ export const initInterface = () => {
 };
 
 export const updateInterface = (matchState: MatchState) => {
-    const matchInfo: MatchInfo = matchState.matchInfo;
-    if (!matchInfo) {
-        return;
-    }
+    const matchInfo: MatchInfo = applyMatchOverrides(matchState.matchInfo);
 
     const settings = getOverlaySettings();
     const useTransparentOverlay = settings.useTransparentOverlay ?? false;
