@@ -188,6 +188,7 @@ const DEFAULT_COLOR = "#010101";
 // Ah well
 const OVERRIDE_COLOR_FIELDS = ["fighter-1-text-color", "fighter-2-text-color", "fighter-1-background-color", "fighter-2-background-color"];
 const OVERRIDE_NUMBER_FIELDS = ["fighter-1-score", "fighter-2-score", "doubles", "match-time"];
+const OVERRIDE_SCORE_FIELDS = OVERRIDE_NUMBER_FIELDS; // Currently the same
 const OVERRIDE_FIELD_MAP: Record<string, keyof MatchInfo | ['fighter1' | 'fighter2', keyof FighterInfo]> = {
     "tournament-name": "tournamentName",
     "fighter-1-name": ["fighter1", "name"],
@@ -224,6 +225,7 @@ const setupMatchOverrideInput = (): void => {
 
     onClick(selectorKey("update-overrides"), updateOverrides);
     onClick(selectorKey("clear-overrides"), clearOverrides);
+    onClick(selectorKey("clear-score-overrides"), clearScoreOverrides);
     onClick(selectorKey("use-default-overrides"), setDefaultOverrides);
 
     for (const key of OVERRIDE_NUMBER_FIELDS) {
@@ -332,7 +334,7 @@ const setDefaultOverrides = (): void => {
     initOverrideFieldsFromData();
     updateOverrides();
     haltMatchTimer();
-}
+};
 
 const clearInputField = (key: string, element: HTMLInputElement): void => {
     if (OVERRIDE_COLOR_FIELDS.includes(key)) {
@@ -340,7 +342,7 @@ const clearInputField = (key: string, element: HTMLInputElement): void => {
     } else {
         element.value = '';
     }
-}
+};
 
 const clearOverrides = (): void => {
     // Stop a bunch of auto updates from firing
@@ -355,7 +357,22 @@ const clearOverrides = (): void => {
     haltMatchTimer();
     suppressAutoUpdates = false;
     autoUpdateOverrides();
-}
+};
+
+const clearScoreOverrides = (): void => {
+    // Stop a bunch of auto updates from firing
+    suppressAutoUpdates = true;
+
+    for (const key of OVERRIDE_SCORE_FIELDS) {
+        const element = queryKey<HTMLInputElement>(key);
+        if (element) {
+            clearInputField(key, element);
+        }
+    }
+    haltMatchTimer();
+    suppressAutoUpdates = false;
+    autoUpdateOverrides();
+};
 
 const haltMatchTimer = (): void => {
     const increaseMatchTime = queryKey<HTMLInputElement>("increase-match-time");

@@ -13,7 +13,10 @@
 <body>
     <div class="config-wrapper">
         <div class="config-section">
-            <h1>Overlay Configuration</h1>
+            <header class="title">
+                <h1>Overlay Configuration</h1>
+                <p class="hint" title="Yes, like that.">Hint: Mouse over any field or button to see what it does!</p>
+            </header>
             <div class="enter-match-id-container"
                 title="Enter the match URL from HEMA Scorecard, or just the match ID if you want.">
                 <h2>Match Data</h2>
@@ -58,40 +61,40 @@
                 </div>
             </div>
             <div class="config-section collapsible">
-                <h2 class="collapsible-header">Match Overrides</h2>
+                <h2 class="collapsible-header" title="Allows you to override match info or even control the overlay manually. Change any field to override it, or leave it blank to continue using the default values.">Match Overrides</h2>
                 <div class="collapsible-content-wrapper">
                     <div class="collapsible-content config-column match-overrides">
-                        <div class="config-input-row">
+                        <div class="config-input-row" title="The name of the tournament. Not currently used anywhere.">
                             <label>Tournament Name</label><input type="text" data-key="tournament-name"/>
                         </div>
                         <div class="stacked-config-column">
                             <div class="config-column">
                                 <h3>Fighter 1</h3>
-                                <div class="config-input-row">
+                                <div class="config-input-row" title="This fighter's name.">
                                     <label>Name</label><input type="text" data-key="fighter-1-name" />
                                 </div>
-                                <div class="config-input-row">
+                                <div class="config-input-row" title="This fighter's school. If you do not want to display a school, enter a single space.">
                                     <label>School</label><input type="text" data-key="fighter-1-school"/>
                                 </div>
-                                <div class="config-input-row">
+                                <div class="config-input-row" title="The text color of this fighter's overlay. If you want to make it black, set all values to 0.">
                                     <label>Text Color</label><input type="color" data-key="fighter-1-text-color"/>
                                 </div>
-                                <div class="config-input-row">
+                                <div class="config-input-row" title="The background color of this fighter's overlay. If you want to make it black, set all values to 0.">
                                     <label>Background Color</label><input type="color" data-key="fighter-1-background-color"/>
                                 </div>
                             </div>
                             <div class="config-column">
                                 <h3>Fighter 2</h3>
-                                <div class="config-input-row">
+                                <div class="config-input-row" title="This fighter's name.">
                                     <label>Name</label><input type="text" data-key="fighter-2-name"/>
                                 </div>
-                                <div class="config-input-row">
+                                <div class="config-input-row" title="This fighter's school. If you do not want to display a school, enter a single space.">
                                     <label>School</label><input type="text" data-key="fighter-2-school"/>
                                 </div>
-                                <div class="config-input-row">
+                                <div class="config-input-row" title="The text color of this fighter's overlay. If you want to make it black, set all values to 0.">
                                     <label>Text Color</label><input type="color" data-key="fighter-2-text-color"/>
                                 </div>
-                                <div class="config-input-row">
+                                <div class="config-input-row" title="The background color of this fighter's overlay. If you want to make it black, set all values to 0.">
                                     <label>Background Color</label><input type="color" data-key="fighter-2-background-color"/>
                                 </div>
                             </div>
@@ -99,7 +102,7 @@
                         <h3>Scoreboard</h3>
                         <div class="stacked-config-column">
                             <div class="config-column">
-                                <div class="config-input-row column">
+                                <div class="config-input-row column" title="Fighter 1's score.">
                                     <label>Fighter 1</label>
                                     <div class="number-input">
                                         <button class="minus"></button>
@@ -109,7 +112,7 @@
                                 </div>
                             </div>
                             <div class="config-column">
-                                <div class="config-input-row column">
+                                <div class="config-input-row column" title="Fighter 2's score.">
                                     <label>Fighter 2</label>
                                     <div class="number-input">
                                         <button class="minus"></button>
@@ -119,7 +122,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="config-input-row">
+                        <div class="config-input-row" title="The number of doubles in the match.">
                             <label>Doubles</label>
                             <div class="number-input">
                                 <button class="minus"></button>
@@ -128,7 +131,7 @@
                                 <button class="plus"></button>
                             </div>
                         </div>
-                        <div class="config-input-row">
+                        <div class="config-input-row" title="The current match time, in seconds.">
                             <label>Match Time</label>
                             <div class="number-input">
                                 <button class="minus"></button>
@@ -136,16 +139,18 @@
                                 <button class="plus"></button>
                             </div>
                         </div>
-                        <div class="config-input-row">
+                        <div class="config-input-row" title="Check this if you are taking manual control of the overlay and want the match time to increase (i.e. match is in progress). Uncheck it to make the timer pause again.">
                             <label>Run Match Timer</label> <input type="checkbox" data-key="increase-match-time"/>
                         </div>
-                        <div class="config-input-row">
+                        <div class="config-input-row" title="If this is unchecked, the overlay will only update when you hit the 'Update' button. Otherwise, it will update as you make changes to the overrides.">
                             <label>Auto Update</label> <input type="checkbox" data-key="auto-update-overrides" />
                         </div>
                         <div class="override-buttons">
-                            <button class="button secondary-button" type="submit" data-key="update-overrides">Update</button>
-                            <button class="button secondary-button" data-key="clear-overrides">Clear All</button>
-                            <button class="button secondary-button" data-key="use-default-overrides">Import From Match</button>
+                            <button class="button secondary-button" type="submit" data-key="update-overrides" title="Apply all overrides to the overlay.">Update</button>
+                            <button class="button secondary-button" data-key="clear-overrides" title="Clear all overrides and return to the defaults provided by HEMA Scorecard.">Clear All</button>
+                            <button class="button secondary-button" data-key="clear-score-overrides"
+                            title="Clear only the scoreboard overrides so the overlay uses values from HEMA Scorecard instead. Useful if you want to import fighter info using 'Import From Match' without overriding the scoreboard.">Reset Scoreboard</button>
+                            <button class="button secondary-button" data-key="use-default-overrides" title="Grab the latest available match data from HEMA Scorecard to use as the defaults.">Import From Match</button>
                         </div>
                     </div>
                 </div>
