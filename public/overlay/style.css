@@ -1,12 +1,12 @@
 body {
     color: var(--overlay-score-text-color);
     background-color: #0a0a0a;
-    --overlay-score-border-color: #fefefe;
-    --overlay-score-text-color: #fefefe;
+    --overlay-score-border-color: var(--secondary-text-color);
+    --overlay-score-text-color: var(--secondary-text-color);
     --overlay-score-background-color: #3d3f75;
     --overlay-fighter-default-text-color: var(--primary-text-color);
-    --overlay-fighter-default-background-color: #fefefe;
-    --overlay-fighter-transparent-text-color: #fefefe;
+    --overlay-fighter-default-background-color: var(--primary-background-color);
+    --overlay-fighter-transparent-text-color: var(--secondary-text-color);
     --overlay-fighter-1-text-color: var(--overlay-fighter-default-text-color);
     --overlay-fighter-1-background-color: var(--overlay-fighter-default-background-color);
     --overlay-fighter-2-text-color: var(--overlay-fighter-default-text-color);
@@ -86,7 +86,7 @@ body.transparent {
     height: 6.75rem;
     padding-left: 0.25rem;
     padding-right: 0.25rem;
-    overflow: hidden;
+    overflow: scroll;
 }
 
 .fighter-1-score {

@@ -6,6 +6,8 @@ export const SettingsSchema = z.object({
     switchFighterSides: z.boolean().optional(),
     showDebugInfo: z.boolean().optional(),
     funMode: z.boolean().optional(),
+    increaseMatchTime: z.boolean().optional(),
+    autoUpdateOverrides: z.boolean().optional(),
 });
 
 export type Settings = z.infer<typeof SettingsSchema>;

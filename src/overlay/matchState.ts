@@ -39,12 +39,12 @@ export class MatchState {
             this._matchInfo = newMatchInfo;
             setCurrentMatchInfo(this._matchInfo);
             this.clearErrors();
-            // console.log(JSON.stringify(this._matchInfo, null, 4));
+            // console.debug(JSON.stringify(this._matchInfo, null, 4));
         } else if (matchUpdate.matchTime !== null) {
             this._matchInfo.matchTime = matchUpdate.matchTime;
             setCurrentMatchInfo(this._matchInfo);
             this.clearErrors();
-            // console.log("Match Time:", this._matchInfo.matchTime);
+            // console.debug("Match Time:", this._matchInfo.matchTime);
         }
     }
 
@@ -100,7 +100,6 @@ export class MatchState {
             console.error(`${functionName} status not handled: ${error} - ${message ?? '{}'}`);
             return;
         }
-        // console.warn(`${functionName} failed with status: ${error}`);
         console.warn(`${functionName} failed with status: ${error} - ${message}`);
     }
 }

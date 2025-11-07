@@ -58,8 +58,13 @@ export const setOverlaySettings = (settings: Settings): void => {
     localStorage.setItem(KEY_SETTINGS, JSON.stringify(settings));
 }
 
-export const setMatchOverrides = (partialMatchInfo: PartialMatchInfo): void => {
-    localStorage.setItem(KEY_MATCH_OVERRIDES, JSON.stringify(partialMatchInfo));
+// TODO: Can remove?
+export const setMatchOverrides = (partialMatchInfo: PartialMatchInfo | null): void => {
+    if (partialMatchInfo) {
+        localStorage.setItem(KEY_MATCH_OVERRIDES, JSON.stringify(partialMatchInfo));
+    } else {
+        localStorage.removeItem(KEY_MATCH_OVERRIDES);
+    }
 }
 
 export const setCurrentMatchInfo = (matchInfo: MatchInfo): void => {

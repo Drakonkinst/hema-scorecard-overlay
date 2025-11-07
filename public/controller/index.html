@@ -11,43 +11,147 @@
 </head>
 
 <body>
-    <div class="controller-wrapper">
-        <h1>Overlay Configuration</h1>
-        <div class="enter-match-id-container" title="Enter the match URL from HEMA Scorecard, or just the match ID if you want.">
-            <h2>Match Data</h2>
-            <div class="enter-match-id-inputs">
-                <label>Paste Match URL here: </label>
-                <div>
-                    <input type="text" class="primary-text-input" data-key="match-id"
-                        placeholder="https://hemascorecard.com/scoreMatch.php?e=553&t=2587&m=281070" />
-                    <div class="enter-match-id-result"></div>
+    <div class="config-wrapper">
+        <div class="config-section">
+            <h1>Overlay Configuration</h1>
+            <div class="enter-match-id-container"
+                title="Enter the match URL from HEMA Scorecard, or just the match ID if you want.">
+                <h2>Match Data</h2>
+                <div class="enter-match-id-inputs">
+                    <label>Paste Match URL here: </label>
+                    <div>
+                        <input type="text" class="primary-text-input" data-key="match-id"
+                            placeholder="https://hemascorecard.com/scoreMatch.php?e=553&t=2587&m=281070" />
+                        <div class="enter-match-id-result"></div>
+                    </div>
+                    <div class="enter-match-id-buttons">
+                        <button class="button secondary-button" type="submit" data-key="set-match-id">Update</button>
+                        <button class="button secondary-button" data-key="clear-match-id">Clear</button>
+                    </div>
                 </div>
-                <div class="enter-match-id-buttons">
-                    <button class="button secondary-button" type="submit" data-key="set-match-id">Update</button>
-                    <button class="button secondary-button" data-key="clear-match-id">Clear</button>
+
+            </div>
+        </div>
+
+
+        <div class="stacked-config-sections">
+            <div class="config-section">
+                <h2>Settings</h2>
+                <div class="checkbox-container"
+                    title="Check this if you have your own image overlay you want to use as a background instead.">
+                    <input type="checkbox" data-key="use-transparent-overlay" /> <label>Use Transparent Overlay</label>
+                </div>
+                <div class="checkbox-container" title="Check this if you want to switch the overlay sides to match the camera angle.">
+                    <input type="checkbox" data-key="switch-fighter-sides" /> <label>Switch Fighter Sides</label>
+                </div>
+                <!-- Advanced -->
+                <h2>Advanced</h2>
+                <div class="checkbox-container" title="Check this if you want to display debug info on the overlay screen.">
+                    <input type="checkbox" data-key="show-debug-info" /> <label>Show Debug Info</label>
+                </div>
+                <div class="checkbox-container"
+                    title="Check this if you're running your own local CORS server and want to use that instead of hemascorecard.com directly.">
+                    <input type="checkbox" data-key="use-local-cors-routing" /> <label>Use Local CORS Routing</label>
+                </div>
+                <div class="checkbox-container" title="Uncheck this if you hate fun.">
+                    <input type="checkbox" data-key="fun-mode" /> <label>Fun Mode</label>
                 </div>
             </div>
-
+            <div class="config-section collapsible">
+                <h2 class="collapsible-header">Match Overrides</h2>
+                <div class="collapsible-content-wrapper">
+                    <div class="collapsible-content config-column match-overrides">
+                        <div class="config-input-row">
+                            <label>Tournament Name</label><input type="text" data-key="tournament-name"/>
+                        </div>
+                        <div class="stacked-config-column">
+                            <div class="config-column">
+                                <h3>Fighter 1</h3>
+                                <div class="config-input-row">
+                                    <label>Name</label><input type="text" data-key="fighter-1-name" />
+                                </div>
+                                <div class="config-input-row">
+                                    <label>School</label><input type="text" data-key="fighter-1-school"/>
+                                </div>
+                                <div class="config-input-row">
+                                    <label>Text Color</label><input type="color" data-key="fighter-1-text-color"/>
+                                </div>
+                                <div class="config-input-row">
+                                    <label>Background Color</label><input type="color" data-key="fighter-1-background-color"/>
+                                </div>
+                            </div>
+                            <div class="config-column">
+                                <h3>Fighter 2</h3>
+                                <div class="config-input-row">
+                                    <label>Name</label><input type="text" data-key="fighter-2-name"/>
+                                </div>
+                                <div class="config-input-row">
+                                    <label>School</label><input type="text" data-key="fighter-2-school"/>
+                                </div>
+                                <div class="config-input-row">
+                                    <label>Text Color</label><input type="color" data-key="fighter-2-text-color"/>
+                                </div>
+                                <div class="config-input-row">
+                                    <label>Background Color</label><input type="color" data-key="fighter-2-background-color"/>
+                                </div>
+                            </div>
+                        </div>
+                        <h3>Scoreboard</h3>
+                        <div class="stacked-config-column">
+                            <div class="config-column">
+                                <div class="config-input-row column">
+                                    <label>Fighter 1</label>
+                                    <div class="number-input">
+                                        <button class="minus"></button>
+                                        <input type="number" min="0" max="9999" data-key="fighter-1-score"/>
+                                        <button class="plus"></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="config-column">
+                                <div class="config-input-row column">
+                                    <label>Fighter 2</label>
+                                    <div class="number-input">
+                                        <button class="minus"></button>
+                                        <input type="number" min="0" max="9999" data-key="fighter-2-score"/>
+                                        <button class="plus"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="config-input-row">
+                            <label>Doubles</label>
+                            <div class="number-input">
+                                <button class="minus"></button>
+                                <!-- Please don't find ways to exceed this limit -->
+                                <input type="number" min="0" max="9999" data-key="doubles" />
+                                <button class="plus"></button>
+                            </div>
+                        </div>
+                        <div class="config-input-row">
+                            <label>Match Time</label>
+                            <div class="number-input">
+                                <button class="minus"></button>
+                                <input type="number" min="0" max="9999" data-key="match-time"/>
+                                <button class="plus"></button>
+                            </div>
+                        </div>
+                        <div class="config-input-row">
+                            <label>Run Match Timer</label> <input type="checkbox" data-key="increase-match-time"/>
+                        </div>
+                        <div class="config-input-row">
+                            <label>Auto Update</label> <input type="checkbox" data-key="auto-update-overrides" />
+                        </div>
+                        <div class="override-buttons">
+                            <button class="button secondary-button" type="submit" data-key="update-overrides">Update</button>
+                            <button class="button secondary-button" data-key="clear-overrides">Clear All</button>
+                            <button class="button secondary-button" data-key="use-default-overrides">Reset to Default</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <h2>Settings</h2>
-        <div class="checkbox-container" title="Check this if you have your own image overlay you want to use as a background instead.">
-            <input type="checkbox" data-key="use-transparent-overlay" /> <label>Use Transparent Overlay</label>
-        </div>
-        <div class="checkbox-container" title="Check this if you want to switch the overlay sides to match the camera angle.">
-            <input type="checkbox" data-key="switch-fighter-sides" /> <label>Switch Fighter Sides</label>
-        </div>
-        <!-- Advanced -->
-        <h2>Advanced</h2>
-        <div class="checkbox-container" title="Check this if you want to display debug info on the overlay screen.">
-            <input type="checkbox" data-key="show-debug-info" /> <label>Show Debug Info</label>
-        </div>
-        <div class="checkbox-container" title="Check this if you're running your own local CORS server and want to use that instead of hemascorecard.com directly.">
-            <input type="checkbox" data-key="use-local-cors-routing" /> <label>Use Local CORS Routing</label>
-        </div>
-        <div class="checkbox-container" title="Uncheck this if you hate fun.">
-            <input type="checkbox" data-key="fun-mode" /> <label>Fun Mode</label>
-        </div>
 
         <div class="credits">
             <span class="credits-author">Created by Wesley Ho</span>

@@ -1,11 +1,16 @@
-.controller-wrapper {
+:root {
+    --collapsible-border-radius: 10px;
+    --collapsible-padding: 0.5rem;
+}
+
+.config-wrapper {
     padding: 2rem;
     min-height: 100%;
     display: flex;
     flex-flow: column nowrap;
 }
 
-h2 {
+h2:not(:first-of-type) {
     margin-top: 1rem;
 }
 
@@ -17,6 +22,59 @@ input[type='checkbox'] {
 input[type='text'] {
     padding: 0.5rem;
     font-size: 0.7em;
+}
+
+input[type='number'] {
+    padding: 0.5rem;
+    font-size: 0.7em;
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+    appearance: textfield;
+    border: solid #aaa;
+    border-width: 0 1px;
+    max-width: 3rem;
+    text-align: center;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
+/* https://stackoverflow.com/a/66335752 */
+
+.number-input {
+    border: 1px solid #aaa;
+    display: inline-flex;
+}
+
+.number-input button {
+    outline: none;
+    background-color: var(--primary-button-background-color);
+    border: none;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+    margin: 0;
+    position: relative;
+    transition: background-color 0.2s ease-out;
+}
+
+.number-input button:hover {
+    background-color: var(--primary-button-highlight-background-color);
+}
+
+.number-input button:after {
+    display: inline-block;
+    position: absolute;
+    content: '−';
+    transform: translate(-50%, -50%) scale(1.75);
+}
+
+.number-input button.plus:after {
+    content: '+';
 }
 
 .checkbox-container {
@@ -33,20 +91,143 @@ input[type='text'] {
     gap: 0.5rem;
     align-items: center;
 }
+
 .primary-text-input {
     width: 27rem;
 }
+
 .enter-match-id-buttons {
     display: flex;
     flex-flow: row wrap;
     gap: 0.5rem;
 }
+
 .enter-match-id-result {
     font-size: 0.8em;
 }
+
 .enter-match-id-result.success {
     color: green;
 }
+
 .enter-match-id-result.error {
     color: darkred;
+}
+
+.stacked-config-sections {
+    display: flex;
+    flex-flow: row wrap;
+    column-gap: 2rem;
+    row-gap: 0.5rem;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+    margin-top: 0.25rem;
+}
+
+.config-section {
+    display: flex;
+    flex-flow: column nowrap;
+    padding: var(--collapsible-padding);
+}
+
+.config-section.collapsible {
+    padding: 0;
+}
+
+.config-section.collapsible h2 {
+    position: relative;
+    background-color: #666666;
+    cursor: pointer;
+    padding: var(--collapsible-padding);
+    border-radius: var(--collapsible-border-radius);
+    color: var(--secondary-text-color);
+    user-select: none;
+    -webkit-user-select: none; /* Safari */
+    transition: border-radius 0.2s ease-out;
+}
+
+.config-section.collapsible.active h2 {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.config-section.collapsible h2:after {
+    content: '+';
+    /* font-size: 0.75em; */
+    color: #ffffff;
+    position: absolute;
+    top: 0;
+    right: 0.5rem;
+    height: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0.5rem;
+}
+
+.config-section.collapsible.active h2:after {
+    content: "−";
+}
+
+.collapsible-content {
+    padding: var(--collapsible-padding);
+}
+
+.config-column {
+    display: flex;
+    flex-flow: column wrap;
+    gap: 0.5rem;
+    flex: 1;
+}
+
+.config-column h3 {
+    margin-top: 0.5rem;
+}
+
+.collapsible-content-wrapper {
+    background-color: #f1f1f1;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.2s ease-out;
+    border-bottom-left-radius: var(--collapsible-border-radius);
+    border-bottom-right-radius: var(--collapsible-border-radius);
+}
+
+.config-input-row {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.config-input-row input[type="checkbox"] {
+    width: 7rem;
+}
+
+.stacked-config-column {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 1rem;
+    justify-content: space-between;
+}
+
+.config-column {
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.override-buttons {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 1rem;
+    justify-content: center;
+    border-top: 2px solid #666666;
+    padding-top: 0.5rem;
+}
+
+.override-buttons .button {
+    font-weight: bold;
 }
