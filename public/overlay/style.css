@@ -132,15 +132,23 @@ body.transparent {
 
 .fighter-name-container {
     display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
+    flex-flow: row nowrap;
+    align-content: center;
     flex: 1;
+}
+
+.fighter-1-info .fighter-name-container {
+    justify-content: flex-start;
+}
+
+.fighter-2-info .fighter-name-container {
+    justify-content: flex-end;
 }
 
 .fighter-name {
     font-size: 3rem;
-    display: inline-block;
     white-space: nowrap;
+    display: inline-block;
 }
 
 .fighter-school {

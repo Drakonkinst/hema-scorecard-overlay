@@ -1,4 +1,4 @@
-import fitty from "fitty";
+import fitty, { type FittyInstance } from "fitty";
 import { getOverlaySettings } from "../utils/database";
 import { setText, getClassList, query } from "../utils/dom";
 import type { MatchInfo } from "../utils/matchStateTypes";
@@ -13,18 +13,10 @@ const VAR_TRANSPARENT_BACKGROUND_COLOR = 'transparent';
 const BASE_REM = 20;
 
 export const initInterface = () => {
-    // For some reason, this shrinks when the window does but doesn't re-expand.
-    // Ah well, shouldn't matter for this use case.
-    fitty(".fighter-1-info .fighter-name", {
+    fitty(".fighter-name", {
         maxSize: 3 * BASE_REM,
     });
-    fitty(".fighter-1-info .fighter-school", {
-        maxSize: 1.25 * BASE_REM,
-    });
-    fitty(".fighter-2-info .fighter-name", {
-        maxSize: 3 * BASE_REM,
-    });
-    fitty(".fighter-2-info .fighter-school", {
+    fitty(".fighter-school", {
         maxSize: 1.25 * BASE_REM,
     });
 };
