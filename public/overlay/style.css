@@ -137,11 +137,11 @@ body.transparent {
     flex: 1;
 }
 
-.fighter-1-info .fighter-name-container {
+.fighter-1-info .fighter-name-container, .fighter-1-info .fighter-school-container {
     justify-content: flex-start;
 }
 
-.fighter-2-info .fighter-name-container {
+.fighter-2-info .fighter-name-container, .fighter-2-info .fighter-school-container {
     justify-content: flex-end;
 }
 
@@ -151,10 +151,16 @@ body.transparent {
     display: inline-block;
 }
 
+.fighter-school-container {
+    display: flex;
+    flex-flow: row nowrap;
+    align-content: flex-start;
+}
+
 .fighter-school {
     font-size: 1.25rem;
-    display: inline-block;
     white-space: nowrap;
+    display: inline-block;
 }
 
 .overlay-debug-info {

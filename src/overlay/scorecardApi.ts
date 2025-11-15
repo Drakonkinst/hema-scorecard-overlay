@@ -79,7 +79,9 @@ export const queryScorecardOverlayInfo = async (matchId: string, lastExchangeId:
         return { error: ApiStatus.API_ERROR, message: errorMsg };
     }
     try {
-        const data = GetStreamOverlayInfoResponseSchema.parse(await response.json());
+        const rawData = await response.json();
+        // console.debug(rawData);
+        const data = GetStreamOverlayInfoResponseSchema.parse(rawData);
         return { data };
     } catch (error) {
         const errorMsg = error instanceof Error ? error.message : "Error during input validation";
