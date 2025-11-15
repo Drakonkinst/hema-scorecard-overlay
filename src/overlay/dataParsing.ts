@@ -8,14 +8,14 @@ export const parseOverlayInfo = (data: GetStreamOverlayInfoResponse): MatchInfo 
         fighter1: {
             name: data.fighter1Name,
             school: data.fighter1School ?? undefined,
-            score: parseInt(data.fighter1Score),
+            score: parseIntOrNaN(data.fighter1Score, 0),
             backgroundColor: data.color1Code,
             textColor: data.color1Contrast,
         },
         fighter2: {
             name: data.fighter2Name,
             school: data.fighter2School ?? undefined,
-            score: parseInt(data.fighter2Score),
+            score: parseIntOrNaN(data.fighter2Score, 0),
             backgroundColor: data.color2Code,
             textColor: data.color2Contrast,
         },
@@ -23,6 +23,14 @@ export const parseOverlayInfo = (data: GetStreamOverlayInfoResponse): MatchInfo 
         matchTime: parseInt(data.matchTime ?? '0'),
         lastExchangeId: data.lastExchange.toString(),
     };
+};
+
+const parseIntOrNaN = (integerStr: string, valueIfNan: number): number => {
+    const value = parseInt(integerStr);
+    if (isNaN(value)) {
+        return valueIfNan;
+    }
+    return value;
 };
 
 export const parseNewExchangeResponse = (data: NewExchangeResponse): MatchUpdate => {

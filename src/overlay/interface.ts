@@ -83,8 +83,8 @@ export const updateInterface = (matchState: MatchState) => {
         bodyEl.style.setProperty("--overlay-fighter-2-background-color", fighter2BackgroundColor);
     }
 
-    setText(".fighter-1-score", fighter1.score.toString());
-    setText(".fighter-2-score", fighter2.score.toString());
+    setText(".fighter-1-score", isNaN(fighter1.score) ? '0' : fighter1.score.toString());
+    setText(".fighter-2-score", isNaN(fighter2.score) ? '0' : fighter2.score.toString());
     setText(".doubles", `Doubles: ${doublesToStr(matchInfo.doubles, !settings.funMode)}`);
     setText(".match-time", timeToStr(matchInfo.matchTime));
 }
