@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+
 body {
     color: var(--overlay-score-text-color);
     background-color: #bababa;
@@ -18,15 +20,26 @@ body.transparent {
     --overlay-score-background-color: transparent;
 }
 
+body {
+    /* background-image: url('./sample.png'); */
+    /* background-repeat: no-repeat; */
+}
+
+body,
+button,
+input {
+    font-family: "Oswald", "Chivo", sans-serif;
+}
+
 .overlay-wrapper {
     display: block;
     position: relative;
     width: 100%;
     height: 100%;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    padding-left: 6rem;
-    padding-right: 6rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.5rem;
+    padding-left: 6.5rem;
+    padding-right: 6.5rem;
 }
 
 .overlay-content {
@@ -44,13 +57,18 @@ body.transparent {
     background-color: var(--overlay-score-background-color);
     text-align: center;
     border-radius: 15px;
-    font-size: 4rem;
-    width: 16rem;
-    height: 5rem;
+    font-size: 5rem;
+    width: 19rem;
+    height: 5.75rem;
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
     justify-content: center;
+}
+
+.match-time {
+    text-shadow: 5px 5px 5px #333333;
+    margin-bottom: 0.5rem;
 }
 
 .overlay-footer {
@@ -67,7 +85,8 @@ body.transparent {
     background-color: var(--overlay-score-background-color);
     text-align: center;
     border-radius: 15px;
-    width: 18.75rem;
+    height: 7.75rem;
+    width: 25rem;
 }
 
 .fighter-scores {
@@ -75,21 +94,18 @@ body.transparent {
     flex-flow: row nowrap;
     align-items: center;
     justify-content: space-between;
-    font-size: 5rem;
+    font-size: 6rem;
 }
 
 .fighter-score {
     flex: 1;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
     width: 50%;
-    height: 6.75rem;
+    height: 7.5rem;
     padding-left: 0.25rem;
+    margin-top: -1rem;
+    margin-bottom: -1rem;
     padding-right: 0.25rem;
-}
-
-.fighter-1-score {
-    border-right: 1px solid var(--overlay-score-border-color);
+    text-shadow: 5px 5px 5px #333333;
 }
 
 .doubles {
@@ -99,65 +115,70 @@ body.transparent {
 .fighter-info {
     display: flex;
     flex-flow: column nowrap;
-    height: 7rem;
+    padding-bottom: 0.5rem;
+    height: 5.5rem;
+    margin-top: 0.5rem;
     flex: 1;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
     background-color: var(--overlay-fighter-default-background-color);
     color: var(--overlay-fighter-default-text-color);
     overflow: hidden;
 }
 
 .fighter-1-info {
-    padding-left: 2rem;
-    padding-right: 1.25rem;
+    padding-left: 3rem;
+    padding-right: 2rem;
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
+    text-align: end;
     color: var(--overlay-fighter-1-text-color);
     background-color: var(--overlay-fighter-1-background-color);
 }
 
 .fighter-2-info {
-    padding-left: 1.25rem;
-    padding-right: 2rem;
+    padding-left: 2rem;
+    padding-right: 3rem;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
-    text-align: end;
+    text-align: start;
     color: var(--overlay-fighter-2-text-color);
     background-color: var(--overlay-fighter-2-background-color);
 }
 
 .fighter-name-container {
     display: flex;
-    flex-flow: row nowrap;
-    align-content: center;
+    flex-flow: column nowrap;
+    justify-content: center;
     flex: 1;
+    margin-bottom: -0.5rem;
+    margin-top: -0.5rem;
 }
 
 .fighter-1-info .fighter-name-container, .fighter-1-info .fighter-school-container {
-    justify-content: flex-start;
+    align-content: flex-end;
 }
 
 .fighter-2-info .fighter-name-container, .fighter-2-info .fighter-school-container {
-    justify-content: flex-end;
+    align-content: flex-start;
 }
 
 .fighter-name {
     font-size: 3rem;
     white-space: nowrap;
     display: inline-block;
+    text-shadow: 5px 5px 5px #333333;
 }
 
 .fighter-school-container {
     display: flex;
-    flex-flow: row nowrap;
-    align-content: flex-start;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
 }
 
 .fighter-school {
     font-size: 1.25rem;
     white-space: nowrap;
     display: inline-block;
+    text-shadow: 5px 5px 5px #333333;
 }
 
 .overlay-debug-info {

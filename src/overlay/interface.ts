@@ -1,4 +1,4 @@
-import fitty, { type FittyInstance } from "fitty";
+import fitty from "fitty";
 import { getOverlaySettings } from "../utils/database";
 import { setText, getClassList, query } from "../utils/dom";
 import type { MatchInfo } from "../utils/matchStateTypes";
@@ -16,9 +16,9 @@ export const initInterface = () => {
     fitty(".fighter-name", {
         maxSize: 3 * BASE_REM,
     });
-    fitty(".fighter-school", {
-        maxSize: 1.25 * BASE_REM,
-    });
+    // fitty(".fighter-school", {
+        // maxSize: 1.25 * BASE_REM,
+    // });
 };
 
 export const updateInterface = (matchState: MatchState) => {
