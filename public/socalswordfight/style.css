@@ -1,0 +1,181 @@
+body {
+    color: var(--overlay-score-text-color);
+    background-color: #bababa;
+    --overlay-score-border-color: var(--secondary-text-color);
+    --overlay-score-text-color: var(--secondary-text-color);
+    --overlay-score-background-color: #3d3f75;
+    --overlay-fighter-default-text-color: var(--primary-text-color);
+    --overlay-fighter-default-background-color: var(--primary-background-color);
+    --overlay-fighter-transparent-text-color: var(--secondary-text-color);
+    --overlay-fighter-1-text-color: var(--overlay-fighter-default-text-color);
+    --overlay-fighter-1-background-color: var(--overlay-fighter-default-background-color);
+    --overlay-fighter-2-text-color: var(--overlay-fighter-default-text-color);
+    --overlay-fighter-2-background-color: var(--overlay-fighter-default-background-color);
+}
+
+body.transparent {
+    --overlay-score-border-color: transparent;
+    --overlay-score-background-color: transparent;
+}
+
+.overlay-wrapper {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 6rem;
+    padding-right: 6rem;
+}
+
+.overlay-content {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    height: 100%;
+}
+
+.overlay-divider {
+    flex: 1
+}
+
+.overlay-header {
+    background-color: var(--overlay-score-background-color);
+    text-align: center;
+    border-radius: 15px;
+    font-size: 4rem;
+    width: 16rem;
+    height: 5rem;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.overlay-footer {
+    display: flex;
+    flex-flow: row nowrap;
+    border-radius: 10px;
+    align-items: center;
+    width: 100%;
+}
+
+.score-container {
+    display: flex;
+    flex-flow: column nowrap;
+    background-color: var(--overlay-score-background-color);
+    text-align: center;
+    border-radius: 15px;
+    width: 18.75rem;
+}
+
+.fighter-scores {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 5rem;
+}
+
+.fighter-score {
+    flex: 1;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    width: 50%;
+    height: 6.75rem;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+}
+
+.fighter-1-score {
+    border-right: 1px solid var(--overlay-score-border-color);
+}
+
+.doubles {
+    display: none;
+}
+
+.fighter-info {
+    display: flex;
+    flex-flow: column nowrap;
+    height: 7rem;
+    flex: 1;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: var(--overlay-fighter-default-background-color);
+    color: var(--overlay-fighter-default-text-color);
+    overflow: hidden;
+}
+
+.fighter-1-info {
+    padding-left: 2rem;
+    padding-right: 1.25rem;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    color: var(--overlay-fighter-1-text-color);
+    background-color: var(--overlay-fighter-1-background-color);
+}
+
+.fighter-2-info {
+    padding-left: 1.25rem;
+    padding-right: 2rem;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    text-align: end;
+    color: var(--overlay-fighter-2-text-color);
+    background-color: var(--overlay-fighter-2-background-color);
+}
+
+.fighter-name-container {
+    display: flex;
+    flex-flow: row nowrap;
+    align-content: center;
+    flex: 1;
+}
+
+.fighter-1-info .fighter-name-container, .fighter-1-info .fighter-school-container {
+    justify-content: flex-start;
+}
+
+.fighter-2-info .fighter-name-container, .fighter-2-info .fighter-school-container {
+    justify-content: flex-end;
+}
+
+.fighter-name {
+    font-size: 3rem;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.fighter-school-container {
+    display: flex;
+    flex-flow: row nowrap;
+    align-content: flex-start;
+}
+
+.fighter-school {
+    font-size: 1.25rem;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.overlay-debug-info {
+    display: block;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    text-align: right;
+}
+
+.overlay-debug-info.hidden {
+    display: none;
+}
+
+.debug-scorecard-api-status {
+    color: lime;
+}
+
+.debug-error-status, .debug-scorecard-api-status.error {
+    color: red;
+}

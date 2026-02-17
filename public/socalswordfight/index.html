@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="https://hemascorecard.com/includes/images/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="./style.css">
+    <title>Overlay - HEMA Scorecard Overlay</title>
+</head>
+
+<body>
+    <div class="overlay-wrapper">
+        <div class="overlay-content">
+            <div class="overlay-header">
+                <div class="match-time">0:00</div>
+            </div>
+            <div class="overlay-divider"></div>
+            <div class="overlay-footer">
+                <div class="fighter-info fighter-1-info">
+                    <div class="fighter-name-container">
+                        <div class="fighter-name">
+                            Fighter 1
+                        </div>
+                    </div>
+                    <div class="fighter-school-container">
+                        <div class="fighter-school">
+                            School 1
+                        </div>
+                    </div>
+                </div>
+                <div class="score-container">
+                    <div class="fighter-scores">
+                        <div class="fighter-score fighter-1-score">0</div>
+                        <div class="fighter-score fighter-2-score">0</div>
+                    </div>
+                    <div class="doubles">Doubles: 0</div>
+                </div>
+                <div class="fighter-info fighter-2-info">
+                    <div class="fighter-name-container">
+                        <div class="fighter-name">
+                            Fighter 2
+                        </div>
+                    </div>
+                    <div class="fighter-school-container">
+                        <div class="fighter-school">
+                            School 2
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="overlay-debug-info hidden">
+                <div class="debug-match-id-container">
+                    Match ID:
+                    <span class="debug-match-id-status">Unknown</span>
+                </div>
+                <div class="debug-scorecard-api-container">
+                    Scorecard API:
+                    <span class="debug-scorecard-api-status"></span>
+                </div>
+                <div class="debug-error-status"></div>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="./app.js"></script>
+</body>
+
+</html>
