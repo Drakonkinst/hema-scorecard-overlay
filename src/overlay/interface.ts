@@ -13,12 +13,18 @@ const VAR_TRANSPARENT_BACKGROUND_COLOR = 'transparent';
 const BASE_REM = 20;
 
 export const initInterface = () => {
-    fitty(".fighter-name", {
-        maxSize: 3 * BASE_REM,
-    });
-    // fitty(".fighter-school", {
-        // maxSize: 1.25 * BASE_REM,
-    // });
+    if (query("body")?.classList.contains("scsf")) {
+        fitty(".fighter-name", {
+            maxSize: 2.75 * BASE_REM,
+        });
+    } else {
+        fitty(".fighter-name", {
+            maxSize: 3 * BASE_REM,
+        });
+        fitty(".fighter-school", {
+            maxSize: 1.25 * BASE_REM,
+        });
+    }
 };
 
 export const updateInterface = (matchState: MatchState) => {
