@@ -27,11 +27,22 @@ export const initInterface = () => {
     }
 };
 
+const getAvgColor = (colorStr: string): number => {
+    if (colorStr.length != 7) {
+        return 0;
+    }
+    const r = parseInt(colorStr.substring(1, 3), 16);
+    const g = parseInt(colorStr.substring(3, 5), 16);
+    const b = parseInt(colorStr.substring(5), 16);
+    return (r + g + b) / 3;
+}
+
 export const updateInterface = (matchState: MatchState) => {
     const matchInfo: MatchInfo = applyMatchOverrides(matchState.matchInfo);
+    const isSCSF = query("body")?.classList.contains("scsf")
 
     const settings = getOverlaySettings();
-    const useTransparentOverlay = settings.useTransparentOverlay ?? false;
+    const useTransparentOverlay = settings.useTransparentOverlay ?? isSCSF;
     const switchFighterSides = settings.switchFighterSides ?? false;
     const showDebugInfo = settings.showDebugInfo ?? false;
 
@@ -73,6 +84,14 @@ export const updateInterface = (matchState: MatchState) => {
     setText(".fighter-2-info .fighter-name", fighter2.name);
     setText(".fighter-1-info .fighter-school", fighter1.school || '');
     setText(".fighter-2-info .fighter-school", fighter2.school || '');
+    const fighter1Name = query(".fighter-1-info .fighter-name");
+    const fighter2Name = query(".fighter-2-info .fighter-name");
+    if (isSCSF && fighter1Name) {
+        fighter1Name.classList.toggle("outlined", getAvgColor(fighter1TextColor) <= 40);
+    }
+    if (isSCSF && fighter2Name) {
+        fighter2Name.classList.toggle("outlined", getAvgColor(fighter2TextColor) <= 40);
+    }
     const bodyEl = query("body");
     if (bodyEl) {
         bodyEl.style.setProperty("--overlay-fighter-1-text-color", fighter1TextColor);

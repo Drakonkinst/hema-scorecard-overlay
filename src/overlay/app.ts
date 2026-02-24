@@ -29,3 +29,4 @@ initInterface();
 // Start loop
 setInterval(doUpdate, UPDATE_INTERVAL);
 doUpdate();
+updateInterface(matchState);
